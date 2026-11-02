@@ -1,14 +1,14 @@
-package io.github.matthewjones372.surefold.arrow
+package dev.surefold.arrow
 
 import arrow.core.raise.Raise
 import arrow.core.raise.either
-import io.github.matthewjones372.surefold.fail.Either
-import io.github.matthewjones372.surefold.fail.Fail
-import io.github.matthewjones372.surefold.fail.NonEmptyList
-import io.github.matthewjones372.surefold.fail.attempt
-import io.github.matthewjones372.surefold.fail.fail
-import io.github.matthewjones372.surefold.fail.fold
-import io.github.matthewjones372.surefold.fail.nonEmptyListOf
+import dev.surefold.fail.Either
+import dev.surefold.fail.Fail
+import dev.surefold.fail.NonEmptyList
+import dev.surefold.fail.attempt
+import dev.surefold.fail.fail
+import dev.surefold.fail.fold
+import dev.surefold.fail.nonEmptyListOf
 
 fun <E, A> Either<E, A>.toArrow(): arrow.core.Either<E, A> =
     fold({ arrow.core.Either.Left(it) }, { arrow.core.Either.Right(it) })

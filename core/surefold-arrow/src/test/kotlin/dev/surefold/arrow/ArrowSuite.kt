@@ -1,13 +1,13 @@
-package io.github.matthewjones372.surefold.arrow
+package dev.surefold.arrow
 
 import arrow.core.raise.either
 import arrow.core.raise.ensure
-import io.github.matthewjones372.surefold.fail.attempt
-import io.github.matthewjones372.surefold.fail.left
-import io.github.matthewjones372.surefold.fail.nonEmptyListOf
-import io.github.matthewjones372.surefold.fail.right
-import io.github.matthewjones372.surefold.junit.Suite
-import io.github.matthewjones372.surefold.junit.shouldBe
+import dev.surefold.fail.attempt
+import dev.surefold.fail.left
+import dev.surefold.fail.nonEmptyListOf
+import dev.surefold.fail.right
+import dev.surefold.junit.Suite
+import dev.surefold.junit.shouldBe
 import arrow.core.left as arrowLeft
 import arrow.core.nonEmptyListOf as arrowNonEmptyListOf
 import arrow.core.right as arrowRight
