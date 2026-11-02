@@ -1,6 +1,7 @@
-package io.github.matthewjones372.surefold.cluster.kubernetes
+package dev.surefold.cluster.kubernetes
 
 import dev.surefold.actor.remote.Node
+import dev.surefold.cluster.Joins
 import dev.surefold.junit.Suite
 import dev.surefold.junit.shouldBe
 import dev.surefold.junit.shouldBeEmpty
@@ -18,7 +19,6 @@ import io.fabric8.mockwebserver.Context
 import io.fabric8.mockwebserver.MockWebServer
 import io.fabric8.mockwebserver.ServerRequest
 import io.fabric8.mockwebserver.ServerResponse
-import io.github.matthewjones372.surefold.cluster.Joins
 import java.net.ServerSocket
 import java.nio.file.Files
 import java.time.Instant

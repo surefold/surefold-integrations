@@ -1,6 +1,7 @@
-package io.github.matthewjones372.surefold.cluster.aws
+package dev.surefold.cluster.aws
 
 import dev.surefold.actor.remote.Node
+import dev.surefold.cluster.Joins
 import dev.surefold.junit.Suite
 import dev.surefold.junit.forAll
 import dev.surefold.junit.shouldBe
@@ -8,7 +9,6 @@ import dev.surefold.junit.shouldBeEmpty
 import dev.surefold.junit.shouldBeInstanceOf
 import dev.surefold.junit.shouldContainExactly
 import dev.surefold.junit.shouldNotBe
-import io.github.matthewjones372.surefold.cluster.Joins
 import software.amazon.awssdk.core.exception.SdkClientException
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue

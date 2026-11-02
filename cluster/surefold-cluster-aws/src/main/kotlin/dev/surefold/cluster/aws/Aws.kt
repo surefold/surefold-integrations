@@ -1,13 +1,13 @@
-package io.github.matthewjones372.surefold.cluster.aws
+package dev.surefold.cluster.aws
 
 import dev.surefold.actor.remote.Node
 import dev.surefold.clock
-import io.github.matthewjones372.surefold.cluster.Discovery
-import io.github.matthewjones372.surefold.cluster.Downing
-import io.github.matthewjones372.surefold.cluster.JoinOptions
-import io.github.matthewjones372.surefold.cluster.Joining
-import io.github.matthewjones372.surefold.cluster.Joins
-import io.github.matthewjones372.surefold.cluster.Lease
+import dev.surefold.cluster.Discovery
+import dev.surefold.cluster.Downing
+import dev.surefold.cluster.JoinOptions
+import dev.surefold.cluster.Joining
+import dev.surefold.cluster.Joins
+import dev.surefold.cluster.Lease
 import software.amazon.awssdk.core.SdkClient
 import software.amazon.awssdk.core.exception.SdkException
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient

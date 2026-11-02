@@ -1,18 +1,18 @@
-package io.github.matthewjones372.surefold.cluster.kubernetes
+package dev.surefold.cluster.kubernetes
 
 import dev.surefold.actor.remote.Node
 import dev.surefold.clock
+import dev.surefold.cluster.Discovery
+import dev.surefold.cluster.Downing
+import dev.surefold.cluster.JoinOptions
+import dev.surefold.cluster.Joining
+import dev.surefold.cluster.Joins
+import dev.surefold.cluster.Lease
 import io.fabric8.kubernetes.api.model.coordination.v1.LeaseBuilder
 import io.fabric8.kubernetes.api.model.coordination.v1.LeaseSpecBuilder
 import io.fabric8.kubernetes.client.KubernetesClient
 import io.fabric8.kubernetes.client.KubernetesClientBuilder
 import io.fabric8.kubernetes.client.KubernetesClientException
-import io.github.matthewjones372.surefold.cluster.Discovery
-import io.github.matthewjones372.surefold.cluster.Downing
-import io.github.matthewjones372.surefold.cluster.JoinOptions
-import io.github.matthewjones372.surefold.cluster.Joining
-import io.github.matthewjones372.surefold.cluster.Joins
-import io.github.matthewjones372.surefold.cluster.Lease
 import java.nio.file.Files
 import java.nio.file.Path
 import java.time.Instant
