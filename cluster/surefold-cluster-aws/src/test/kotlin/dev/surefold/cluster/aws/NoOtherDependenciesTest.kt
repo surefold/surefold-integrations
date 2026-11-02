@@ -1,4 +1,4 @@
-package io.github.matthewjones372.surefold.cluster.aws
+package dev.surefold.cluster.aws
 
 import dev.surefold.assert.shouldBeEmpty
 import dev.surefold.assert.shouldNotBeNull

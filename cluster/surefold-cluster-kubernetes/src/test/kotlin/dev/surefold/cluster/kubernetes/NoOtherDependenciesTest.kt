@@ -1,4 +1,4 @@
-package io.github.matthewjones372.surefold.cluster.kubernetes
+package dev.surefold.cluster.kubernetes
 
 import dev.surefold.assert.shouldBeEmpty
 import dev.surefold.assert.shouldNotBeNull
