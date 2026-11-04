@@ -25,6 +25,7 @@ val repoRoot = rootProject.projectDir.absolutePath
 val documentedRecipes = files(
     rootProject.layout.projectDirectory.file("docs/observability.md"),
     rootProject.layout.projectDirectory.file("docs/arrow.md"),
+    rootProject.layout.projectDirectory.file("docs/pekko.md"),
 )
 
 tasks.test {

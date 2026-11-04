@@ -143,6 +143,12 @@ val benchmarkModules =
 // Built and tested, never published: surefold-stream-parity runs every backend's tests against each other.
 val unpublished = setOf("surefold-stream-parity") + benchmarkModules
 
+// The modules a snapshot or a release publishes, one per line: snapshot.yml checks each is on GitHub Packages after.
+tasks.register("publishedModules") {
+    val names = subprojects.map { it.name }.filterNot { it in unpublished }.sorted()
+    doLast { names.forEach(::println) }
+}
+
 /** The surefold-core snapshot this build is pinned to (gradle.properties), or its source beside this checkout. */
 val surefoldCore: String = providers.gradleProperty("surefoldCore").get()
 
