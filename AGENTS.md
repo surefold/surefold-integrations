@@ -116,7 +116,8 @@ Work out which of these a change can break:
 ### Examples in the docs are compiled
 
 The guides' Kotlin fences are compiled by tests that read the Markdown: `GuideTest` in surefold-app-pekko
-(`docs/observability.md`, `docs/arrow.md`, `docs/pekko.md`, `docs/configuration.md`), `ReportedSuite` in
+(`docs/observability.md`, `docs/arrow.md`, `docs/pekko.md`, `docs/configuration.md`, `docs/flags.md`),
+`PekkoGuideSuite` in surefold-stream-pekko (`docs/pekko.md`'s stream examples), `ReportedSuite` in
 surefold-app-typesafe and `GuideConfigSuite` in surefold-app-cluster (`docs/configuration.md`'s report and HOCON),
 `SqsGuideSuite`, `SqsPekkoGuideSuite`, `SnsGuideSuite` and `JdbcGuideSuite`. A fence is found by the HTML comment
 above it, such as `<!-- arrow-either -->`, so keep the marker when editing an example, and add one to a new complete
