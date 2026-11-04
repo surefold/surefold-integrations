@@ -37,6 +37,8 @@ dependencies {
 // execution time would not survive the configuration cache.
 val repoRoot = rootProject.projectDir.absolutePath
 val judgedSources = files(layout.projectDirectory.dir("src/main/kotlin"))
+// The page PekkoGuideSuite compiles its stream examples out of, so an edit to it re-runs the suite.
+val guide = files(rootProject.layout.projectDirectory.file("docs/pekko.md"))
 
 tasks.test {
     // The main runtime classpath, so the dependency test can assert on what is
@@ -48,6 +50,7 @@ tasks.test {
     // read files Gradle knows nothing about, and a violation would ride green
     // builds until `--rerun-tasks`.
     inputs.files(judgedSources).withPropertyName("judgedSources")
+    inputs.files(guide).withPropertyName("guide")
     // DoesNotCompileTest runs the Kotlin compiler inside the test JVM. Gradle's
     // default heap turns that into a garbage-collection stall long enough to
     // trip the suite's 60s timeout.
