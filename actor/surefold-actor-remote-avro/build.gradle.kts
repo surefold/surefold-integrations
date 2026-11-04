@@ -1,11 +1,12 @@
 // Messages of surefold-actor-remote in Avro (spec 0071): a codec for a specific record, resolved across its versions,
 // and for an ask whose request is one. NoOtherDependenciesTest asserts the runtime classpath.
+val surefoldCore: String by rootProject.extra
 
 dependencies {
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
     // freePort(): a port below the ephemeral range, never handed out twice in a JVM (spec 0197).
-    testImplementation(testFixtures(project(":surefold-actor-remote")))
-    api(project(":surefold-actor-remote"))
+    testImplementation(testFixtures("dev.surefold:surefold-actor-remote:$surefoldCore"))
+    api("dev.surefold:surefold-actor-remote:$surefoldCore")
     api("org.apache.avro:avro:1.12.2")
 }
 

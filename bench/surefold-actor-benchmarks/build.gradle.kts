@@ -1,3 +1,5 @@
+val surefoldCore: String by rootProject.extra
+
 /**
  * surefold-actor measured by JMH against the same actors written on Pekko Typed: the numbers spec 0059 quotes.
  *
@@ -13,10 +15,10 @@ val pekkoJdbcVersion = "1.3.0"
 val scalaBinary = "2.13"
 
 dependencies {
-    implementation(project(":surefold-actor"))
-    implementation(project(":surefold-actor-remote"))
+    implementation("dev.surefold:surefold-actor:$surefoldCore")
+    implementation("dev.surefold:surefold-actor-remote:$surefoldCore")
     // A hot persistent actor measured on a real Postgres (spec 0085), in a container.
-    implementation(project(":surefold-actor-journal-jdbc"))
+    implementation("dev.surefold:surefold-actor-journal-jdbc:$surefoldCore")
     implementation(project(":surefold-app-liquibase"))
     implementation("org.testcontainers:testcontainers-postgresql:2.0.5")
     implementation("org.postgresql:postgresql:42.7.7")
@@ -25,7 +27,7 @@ dependencies {
     implementation("org.apache.pekko:pekko-actor-typed_$scalaBinary:$pekkoVersion")
     implementation("org.apache.pekko:pekko-remote_$scalaBinary:$pekkoVersion")
     // Three nodes of a cluster on each side (spec 0092): surefold's sharding against Pekko Cluster Sharding.
-    implementation(project(":surefold-cluster"))
+    implementation("dev.surefold:surefold-cluster:$surefoldCore")
     implementation("org.apache.pekko:pekko-cluster-sharding-typed_$scalaBinary:$pekkoVersion")
     // Distributed pub-sub: Pekko's Topic finds its instances on other nodes through the cluster's receptionist.
     implementation("org.apache.pekko:pekko-cluster-typed_$scalaBinary:$pekkoVersion")

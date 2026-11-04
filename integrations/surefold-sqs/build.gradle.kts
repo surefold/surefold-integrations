@@ -1,10 +1,11 @@
 // SQS as a surefold Stream on any backend (spec 0286): surefold-stream and the AWS SDK's SQS client, on the JDK's own
 // HTTP client, so neither Netty nor Apache's client comes with it. NoOtherDependenciesTest asserts the classpath.
+val surefoldCore: String by rootProject.extra
 
 val awsVersion = "2.55.6"
 
 dependencies {
-    api(project(":surefold-stream"))
+    api("dev.surefold:surefold-stream:$surefoldCore")
     api("software.amazon.awssdk:sqs:$awsVersion") {
         exclude(group = "software.amazon.awssdk", module = "apache-client")
         exclude(group = "software.amazon.awssdk", module = "apache5-client")
@@ -13,11 +14,11 @@ dependencies {
     implementation("software.amazon.awssdk:url-connection-client:$awsVersion")
 
     // Both backends a read is run on in the tests: Forks, and Forks on a test clock.
-    testImplementation(project(":surefold-stream-forks"))
-    testImplementation(project(":surefold-stream-test"))
+    testImplementation("dev.surefold:surefold-stream-forks:$surefoldCore")
+    testImplementation("dev.surefold:surefold-stream-test:$surefoldCore")
     // SQS's own protocol in the test JVM, for the claims a fake client cannot check (spec 0288).
     testImplementation(project(":surefold-sqs-test"))
-    testImplementation(project(":surefold-test"))
+    testImplementation("dev.surefold:surefold-test:$surefoldCore")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }
 

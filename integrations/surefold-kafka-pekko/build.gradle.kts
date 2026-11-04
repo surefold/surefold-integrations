@@ -1,5 +1,6 @@
 // surefold-kafka through Pekko's own Kafka connector: surefold-kafka, surefold-stream-pekko and the connector, and
 // nothing else. NoOtherDependenciesTest asserts that on the classpath a consumer actually gets.
+val surefoldCore: String by rootProject.extra
 
 val pekkoVersion = "1.2.1"
 val scalaBinary = "2.13"
@@ -18,7 +19,7 @@ dependencies {
     testImplementation(project(":surefold-kafka-test"))
     // The compiler, so that which overload a call resolves to, and what does not compile, are tests.
     testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.10")
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {

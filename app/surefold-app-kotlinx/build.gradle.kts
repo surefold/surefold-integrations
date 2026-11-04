@@ -5,10 +5,12 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+val surefoldCore: String by rootProject.extra
+
 dependencies {
     api(project(":surefold-app-typesafe"))
     api("org.jetbrains.kotlinx:kotlinx-serialization-core:1.11.0")
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {

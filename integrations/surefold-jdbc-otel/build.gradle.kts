@@ -1,7 +1,9 @@
+val surefoldCore: String by rootProject.extra
+
 dependencies {
     api(project(":surefold-otel"))
     implementation("io.opentelemetry.instrumentation:opentelemetry-jdbc:2.33.1-alpha")
-    testImplementation(testFixtures(project(":surefold-actor-journal-jdbc")))
+    testImplementation(testFixtures("dev.surefold:surefold-actor-journal-jdbc:$surefoldCore"))
     testImplementation("com.zaxxer:HikariCP:7.1.0")
     testImplementation(project(":surefold-otel-test"))
 }

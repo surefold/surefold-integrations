@@ -1,10 +1,11 @@
 // SNS publishing from a surefold Stream on any backend (spec 0287): surefold-stream and the AWS SDK's SNS client, on
 // the JDK's own HTTP client, so neither Netty nor Apache's client comes with it. NoOtherDependenciesTest asserts it.
+val surefoldCore: String by rootProject.extra
 
 val awsVersion = "2.55.6"
 
 dependencies {
-    api(project(":surefold-stream"))
+    api("dev.surefold:surefold-stream:$surefoldCore")
     // For publishBatch over messages read from SQS, which deletes each only after its own publish (spec 0287).
     api(project(":surefold-sqs"))
     api("software.amazon.awssdk:sns:$awsVersion") {
@@ -14,10 +15,10 @@ dependencies {
     }
     implementation("software.amazon.awssdk:url-connection-client:$awsVersion")
 
-    testImplementation(project(":surefold-stream-forks"))
+    testImplementation("dev.surefold:surefold-stream-forks:$surefoldCore")
     // Topics that deliver to real queues, for the claims a fake client cannot check (spec 0291).
     testImplementation(project(":surefold-sns-test"))
-    testImplementation(project(":surefold-test"))
+    testImplementation("dev.surefold:surefold-test:$surefoldCore")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }
 

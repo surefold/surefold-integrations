@@ -6,7 +6,7 @@ offset, and the only way to run one is `runCommitting`. Forgetting to commit,
 or committing before the work, does not compile.
 
 Everything below is in `dev.surefold.kafka`. A Kafka
-pipeline is an ordinary [surefold-stream](stream.md) `Stream`, so the operators,
+pipeline is an ordinary [surefold-stream](https://github.com/surefold/surefold-core/blob/main/docs/stream.md) `Stream`, so the operators,
 backends and test support described there apply here too.
 
 ## Delivery at a glance

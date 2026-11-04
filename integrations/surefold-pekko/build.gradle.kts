@@ -1,6 +1,8 @@
 // Pekko 1.2.x for the Scala 2.13 build, as the rest of this author's Pekko
 // modules use. `virtual-thread-executor` arrived in Pekko 1.1, and a
 // dispatcher without it is one surefold refuses.
+val surefoldCore: String by rootProject.extra
+
 val pekkoVersion = "1.2.1"
 val scalaBinary = "2.13"
 
@@ -8,10 +10,10 @@ val scalaBinary = "2.13"
 // classic and the typed system implement it, so the typed artifact is not
 // needed to take either.
 dependencies {
-    api(project(":surefold"))
+    api("dev.surefold:surefold:$surefoldCore")
     api("org.apache.pekko:pekko-actor_$scalaBinary:$pekkoVersion")
 
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {

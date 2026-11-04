@@ -1,6 +1,7 @@
 // surefold-sqs through Pekko's own SQS connector (spec 0290): surefold-sqs, surefold-stream-pekko and the connector,
 // whose async client runs on its own Pekko HTTP transport, so Netty does not come with it.
 // NoOtherDependenciesTest asserts that on the classpath a consumer actually gets.
+val surefoldCore: String by rootProject.extra
 
 val scalaBinary = "2.13"
 
@@ -20,7 +21,7 @@ dependencies {
     // ElasticMQ, which brings Pekko 1.5 onto the test classpath (spec 0288), so the suites run there on 1.5 and
     // make their actor system without the typed testkit, whose 1.2 Pekko refuses to mix with it.
     testImplementation(project(":surefold-sqs-test"))
-    testImplementation(project(":surefold-test"))
+    testImplementation("dev.surefold:surefold-test:$surefoldCore")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }
 

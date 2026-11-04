@@ -1,10 +1,12 @@
 // surefold-app on surefold-openfeature: an OpenFeature provider as a node, set before anything reads a flag and
 // shut down on release. It adds nothing beyond the two, which NoOtherDependenciesTest asserts.
+val surefoldCore: String by rootProject.extra
+
 dependencies {
-    api(project(":surefold-app"))
+    api("dev.surefold:surefold-app:$surefoldCore")
     api(project(":surefold-openfeature"))
 
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {

@@ -1,5 +1,6 @@
 // An SQS queue in the test JVM for a service's own tests (spec 0288): surefold-sqs, ElasticMQ and JUnit's Jupiter API,
 // and nothing else. NoOtherDependenciesTest asserts that on the classpath a consumer actually gets.
+val surefoldCore: String by rootProject.extra
 
 val elasticMq = "org.elasticmq:elasticmq-rest-sqs_2.13:1.7.1"
 val jupiterApi = "org.junit.jupiter:junit-jupiter-api:6.1.3"
@@ -20,7 +21,7 @@ dependencies {
     allowed(elasticMq)
     allowed(jupiterApi)
 
-    testImplementation(project(":surefold-stream-forks"))
+    testImplementation("dev.surefold:surefold-stream-forks:$surefoldCore")
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }
 

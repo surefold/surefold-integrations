@@ -1,11 +1,12 @@
 // One suite of described pipelines, run on every backend: a test-only module, so that no backend has to
 // depend on another to be held to the same answers. A backend joins by being added to ParitySuite's list.
+val surefoldCore: String by rootProject.extra
 
 dependencies {
     testImplementation(project(":surefold-stream-pekko"))
-    testImplementation(project(":surefold-stream-forks"))
-    testImplementation(project(":surefold-stream-test"))
-    testImplementation(project(":surefold-stream-actors"))
+    testImplementation("dev.surefold:surefold-stream-forks:$surefoldCore")
+    testImplementation("dev.surefold:surefold-stream-test:$surefoldCore")
+    testImplementation("dev.surefold:surefold-stream-actors:$surefoldCore")
 }
 
 // The suite asks each backend which operators it runs, which is the node tree the opt-in covers.

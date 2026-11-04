@@ -1,5 +1,7 @@
 import java.util.Properties
 
+val surefoldCore: String by rootProject.extra
+
 /**
  * surefold-stream measured by JMH: the baseline 0046 and 0047 report against.
  *
@@ -12,8 +14,8 @@ val jmhVersion = "1.37"
 
 dependencies {
     implementation(project(":surefold-stream-pekko"))
-    implementation(project(":surefold-stream-forks"))
-    implementation(project(":surefold-stream-actors"))
+    implementation("dev.surefold:surefold-stream-forks:$surefoldCore")
+    implementation("dev.surefold:surefold-stream-actors:$surefoldCore")
     implementation("org.openjdk.jmh:jmh-core:$jmhVersion")
 }
 

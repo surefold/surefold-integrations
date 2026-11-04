@@ -1,3 +1,5 @@
+val surefoldCore: String by rootProject.extra
+
 /**
  * surefold-kafka against the plain Java client, measured by JMH: zio-kafka's comparison benchmarks ported.
  * The JMH wiring is surefold-stream-benchmarks' taken as it is. Nothing here is published.
@@ -9,7 +11,7 @@ val scalaBinary = "2.13"
 dependencies {
     implementation(project(":surefold-kafka"))
     implementation(project(":surefold-kafka-pekko"))
-    implementation(project(":surefold-stream-forks"))
+    implementation("dev.surefold:surefold-stream-forks:$surefoldCore")
     implementation("org.openjdk.jmh:jmh-core:$jmhVersion")
     // The broker in the benchmark's own JVM, as zio-kafka's benchmarks run theirs.
     implementation("io.github.embeddedkafka:embedded-kafka_$scalaBinary:4.3.1")

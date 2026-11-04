@@ -7,7 +7,7 @@ to, does not compile.
 
 Everything below is in `dev.surefold.sqs`, in `surefold-sqs`, which depends on
 `surefold-stream` and the AWS SDK's `sqs` client on the JDK's own HTTP client.
-A read is an ordinary [surefold-stream](stream.md) `Stream`, so the operators,
+A read is an ordinary [surefold-stream](https://github.com/surefold/surefold-core/blob/main/docs/stream.md) `Stream`, so the operators,
 backends and test support described there apply here too.
 
 ## Delivery at a glance

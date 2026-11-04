@@ -50,7 +50,7 @@ fun register(id: String, items: List<Int>): List<Unit> =
 ```
 
 An MDC entry does not survive a fork, because it lives in a `ThreadLocal`.
-Annotations do, because they are bound in a [`SurefoldLocal`](core.md#what-a-fork-inherits).
+Annotations do, because they are bound in a [`SurefoldLocal`](https://github.com/surefold/surefold-core/blob/main/docs/core.md#what-a-fork-inherits).
 
 **With `surefold-slf4j`,** each line goes to the SLF4J logger named after the
 top-level class that wrote it, so `%logger` names that class and a backend can
@@ -113,18 +113,18 @@ which is where Spring and the OpenTelemetry bridge put theirs. Bind
 Surefold's modules record through the same API, under names starting `surefold.`, so
 installing `surefold-micrometer` exports them with nothing more to write:
 
-- policies, breakers, bulkheads and rate limiters: see [Policies](core.md#policies);
+- policies, breakers, bulkheads and rate limiters: see [Policies](https://github.com/surefold/surefold-core/blob/main/docs/core.md#policies);
 - `transact` steps: `surefold.transact.runs`, `.retries` and `.attempts`, see
-  [Why a step ran again](core.md#why-a-step-ran-again);
+  [Why a step ran again](https://github.com/surefold/surefold-core/blob/main/docs/core.md#why-a-step-ran-again);
 - streams: `surefold.stream.elements`, `surefold.stream.busy` and
   `surefold.stream.waiting` per stage, for a run started with
-  [`measured`](stream.md#optimisation-rendering-and-profiling);
+  [`measured`](https://github.com/surefold/surefold-core/blob/main/docs/stream.md#optimisation-rendering-and-profiling);
 - Kafka consumers and producers: `surefold.kafka.*`, see
   [Meters](kafka.md#meters);
 - SQS reads and sends: `surefold.sqs.*`, see [Meters](sqs.md#meters);
 - SNS publishes: `surefold.sns.publisher.*`, see [Meters](sns.md#meters);
 - actors, remoting, membership, sharding, reliable delivery and topics: see
-  [Watching a cluster](cluster.md#watching).
+  [Watching a cluster](https://github.com/surefold/surefold-core/blob/main/docs/cluster.md#watching).
 
 ## Traces
 
@@ -157,10 +157,10 @@ fun registering(tracer: Tracer) =
 line written inside it, so a log line names its trace and a trace names its
 log lines.
 
-A [`transact`](core.md#why-a-step-ran-again) step that ran more than once adds
+A [`transact`](https://github.com/surefold/surefold-core/blob/main/docs/core.md#why-a-step-ran-again) step that ran more than once adds
 a `transact.retried` event to the current span when it commits, with its name,
 its `attempts`, a `retries.<cause>` count for each value it lost to, and
-`solo` when it [ran alone](core.md#when-a-step-keeps-losing) in the end. A step
+`solo` when it [ran alone](https://github.com/surefold/surefold-core/blob/main/docs/core.md#when-a-step-keeps-losing) in the end. A step
 that commits on its first run adds nothing.
 
 ### Across messages, events and records
@@ -232,7 +232,7 @@ an earlier JDK is not a like-for-like baseline.
 
 `capturingLogs { logs -> … }` and `capturingMetrics { measured -> … }` bind an
 in-memory logger or registry for a block, so a test asserts on values rather
-than on a backend. See [Testing](testing.md#logs-and-metrics).
+than on a backend. See [Testing](https://github.com/surefold/surefold-core/blob/main/docs/testing.md#logs-and-metrics).
 
 For spans, `surefold-otel-test`'s `Spans` is a tracer that keeps every span it
 ends. Hand its `tracer` to the code under test and read `all()` or

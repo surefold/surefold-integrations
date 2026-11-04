@@ -5,12 +5,14 @@
 // Declared at the oldest version this compiles against, for the reason surefold-slf4j
 // declares slf4j at 1.7.36: resolution takes the highest asked for, so this can
 // only be raised by a consumer and never lowers anyone.
+val surefoldCore: String by rootProject.extra
+
 val micrometerVersion = "1.12.0"
 
 dependencies {
-    api(project(":surefold"))
+    api("dev.surefold:surefold:$surefoldCore")
     api("io.micrometer:micrometer-core:$micrometerVersion")
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {

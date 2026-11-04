@@ -8,13 +8,15 @@ plugins {
     id("com.google.protobuf") version "0.9.5"
 }
 
+val surefoldCore: String by rootProject.extra
+
 val protobufVersion = "4.36.2"
 
 dependencies {
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
     // freePort(): a port below the ephemeral range, never handed out twice in a JVM (spec 0197).
-    testImplementation(testFixtures(project(":surefold-actor-remote")))
-    api(project(":surefold-actor-remote"))
+    testImplementation(testFixtures("dev.surefold:surefold-actor-remote:$surefoldCore"))
+    api("dev.surefold:surefold-actor-remote:$surefoldCore")
     // Its protobuf format and schema generator are marked experimental: pinned to the version tested here.
     api("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.11.0")
 

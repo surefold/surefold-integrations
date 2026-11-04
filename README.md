@@ -1,6 +1,6 @@
 # Surefold integrations
 
-Every Surefold module that wraps one outside library: Pekko, Kafka, SQS and SNS, the AWS SDK, protobuf, Avro and kotlinx wire formats, Kubernetes and AWS discovery, Typesafe Config, Liquibase, Flyway, OpenFeature, SLF4J, Micrometer, OpenTelemetry and Arrow.
+Every Surefold module that wraps one outside library: Pekko, Kafka, SQS and SNS, the AWS SDK, protobuf, Avro and kotlinx wire formats, Kubernetes and AWS discovery, Typesafe Config, Liquibase, OpenFeature, SLF4J, Micrometer, OpenTelemetry and Arrow.
 
 This repository is part of Surefold, which is three repositories:
 
@@ -12,12 +12,29 @@ This repository is part of Surefold, which is three repositories:
 
 ## Status
 
-Empty until its seed lands: the modules still live in `surefold-core` and move here with their history under
-spec 0302 in `surefold-core`. Coordinates and packages do not change: every artifact stays `dev.surefold:<name>` and every
-package `dev.surefold.*`.
+Seeded from `surefold-core` with each module's history (surefold-core's spec 0302). Coordinates and packages did not
+change: every artifact stays `dev.surefold:<name>` and every package `dev.surefold.*`.
 
-Nothing is on Maven Central yet. Builds use pinned snapshots from GitHub Packages, and the first release of each
-repository comes once all three are proven to work together.
+Nothing is on Maven Central yet. This repository builds against a pinned `surefold-core` snapshot from GitHub Packages
+(`surefoldCore` in `gradle.properties`), and the first release of each repository comes once all three are proven
+to work together.
+
+## Building
+
+```bash
+./gradlew build
+```
+
+GitHub Packages asks for a token even to read a public package: put a classic personal access token with only
+`read:packages` in `~/.gradle/gradle.properties` as `githubPackagesUsername` and `githubPackagesPassword`. With
+`surefold-core` checked out beside this repository (`../surefold-core`), the build uses its source instead, and needs
+no token for it.
+
+## Guides
+
+[Kafka](docs/kafka.md), [SQS](docs/sqs.md), [SNS](docs/sns.md), [observability](docs/observability.md),
+[JDBC tracing](docs/jdbc-tracing.md) and [Arrow](docs/arrow.md). The core's guides are in
+[surefold-core](https://github.com/surefold/surefold-core).
 
 ## Depending on Surefold
 

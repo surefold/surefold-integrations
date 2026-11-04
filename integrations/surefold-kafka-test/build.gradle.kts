@@ -1,6 +1,7 @@
 // A Kafka broker in the test JVM for a service's own tests (spec 0161): surefold-kafka, embedded-kafka and JUnit's
 // Jupiter API, and nothing else.
 // NoOtherDependenciesTest asserts that on the classpath a consumer actually gets.
+val surefoldCore: String by rootProject.extra
 
 val scalaBinary = "2.13"
 val embeddedKafka = "io.github.embeddedkafka:embedded-kafka_$scalaBinary:4.3.1"
@@ -22,7 +23,7 @@ dependencies {
     allowed(embeddedKafka)
     allowed(jupiterApi)
 
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
     // The broker's own log, errors only: a fatal fault is logged here before KafkaBroker turns its exit into a throw.
     testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
 }

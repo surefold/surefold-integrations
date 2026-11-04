@@ -1,7 +1,7 @@
 # SNS
 
 **An element passes on only once SNS has its message.** `surefold-sns`
-publishes to a topic from any [surefold-stream](stream.md) `Stream`, one
+publishes to a topic from any [surefold-stream](https://github.com/surefold/surefold-core/blob/main/docs/stream.md) `Stream`, one
 message at a time or ten to a `PublishBatch`, and answers for each message on
 its own.
 

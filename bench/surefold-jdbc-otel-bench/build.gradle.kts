@@ -2,13 +2,15 @@ plugins {
     application
 }
 
+val surefoldCore: String by rootProject.extra
+
 dependencies {
-    implementation(project(":surefold"))
+    implementation("dev.surefold:surefold:$surefoldCore")
     implementation(project(":surefold-jdbc-otel"))
     implementation("io.opentelemetry:opentelemetry-sdk:1.67.0")
     implementation("org.postgresql:postgresql:42.7.7")
     implementation("com.zaxxer:HikariCP:7.1.0")
-    testImplementation(project(":surefold-junit"))
+    testImplementation("dev.surefold:surefold-junit:$surefoldCore")
 }
 
 application {

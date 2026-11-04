@@ -8,10 +8,12 @@
 // this can only be raised by a consumer and never lowers anyone — where a 2.x
 // floor would move a service on 1.7 across the change from StaticLoggerBinder to
 // ServiceLoader providers, and its logging would go quiet for adding a module.
+val surefoldCore: String by rootProject.extra
+
 val slf4jVersion = "1.7.36"
 
 dependencies {
-    api(project(":surefold"))
+    api("dev.surefold:surefold:$surefoldCore")
     api("org.slf4j:slf4j-api:$slf4jVersion")
 
     // Run the tests against a current one, since that is what resolution gives
@@ -21,7 +23,7 @@ dependencies {
     // A claim about a backend asserted against a fake backend is a claim about
     // the fake, so the tests run against the one most services use.
     testImplementation("ch.qos.logback:logback-classic:1.5.20")
-    testImplementation(project(":surefold-assert"))
+    testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
 tasks.test {
