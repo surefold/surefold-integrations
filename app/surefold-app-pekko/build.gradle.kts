@@ -12,6 +12,8 @@ dependencies {
     // The Kotlin compiler in the test JVM, so the guides' examples are compiled
     // rather than believed.
     testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.10")
+    // For the flags guide, which declares and reads flags over the OpenFeature SDK.
+    testImplementation(project(":surefold-openfeature"))
     // For the migration page's examples, which convert to and from Arrow.
     testImplementation(project(":surefold-arrow"))
     testImplementation("dev.surefold:surefold-assert:$surefoldCore")
@@ -26,6 +28,7 @@ val documentedRecipes = files(
     rootProject.layout.projectDirectory.file("docs/observability.md"),
     rootProject.layout.projectDirectory.file("docs/arrow.md"),
     rootProject.layout.projectDirectory.file("docs/pekko.md"),
+    rootProject.layout.projectDirectory.file("docs/flags.md"),
 )
 
 tasks.test {
