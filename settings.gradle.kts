@@ -32,6 +32,7 @@ module("app", "surefold-app-liquibase")
 module("app", "surefold-app-typesafe")
 module("app", "surefold-app-kotlinx")
 module("app", "surefold-app-cluster")
+module("app", "surefold-app-wiring-tests")
 
 module("integrations", "surefold-pekko")
 module("integrations", "surefold-actor-pekko")

@@ -140,8 +140,9 @@ val benchmarkModules =
         "surefold-jdbc-otel-bench",
     )
 
-// Built and tested, never published: surefold-stream-parity runs every backend's tests against each other.
-val unpublished = setOf("surefold-stream-parity") + benchmarkModules
+// Built and tested, never published: surefold-stream-parity runs every backend's tests against each other, and
+// surefold-app-wiring-tests runs surefold-core's wiring plugin on apps built from the modules here.
+val unpublished = setOf("surefold-stream-parity", "surefold-app-wiring-tests") + benchmarkModules
 
 // The modules a snapshot or a release publishes, one per line: snapshot.yml checks each is on GitHub Packages after.
 tasks.register("publishedModules") {
