@@ -32,7 +32,8 @@ no token for it.
 
 ## Guides
 
-[Pekko](docs/pekko.md), [feature flags](docs/flags.md), [Kafka](docs/kafka.md), [SQS](docs/sqs.md), [SNS](docs/sns.md),
+[Pekko](docs/pekko.md), [configuration](docs/configuration.md), [feature flags](docs/flags.md), [Kafka](docs/kafka.md),
+[SQS](docs/sqs.md), [SNS](docs/sns.md),
 [observability](docs/observability.md),
 [JDBC tracing](docs/jdbc-tracing.md) and [Arrow](docs/arrow.md). The core's guides are in
 [surefold-core](https://github.com/surefold/surefold-core).
