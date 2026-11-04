@@ -1,8 +1,8 @@
 # surefold-stream-benchmarks
 
 What today's `surefold-stream` costs, measured by JMH. This is the baseline that spec
-[0046](../../specs/0046-a-stream-described-once.md) must match and
-[0047](../../specs/0047-a-stream-the-compiler-sees-whole.md) must beat.
+[0046](https://github.com/surefold/surefold-core/blob/main/specs/0046-a-stream-described-once.md) must match and
+[0047](https://github.com/surefold/surefold-core/blob/main/specs/0047-a-stream-the-compiler-sees-whole.md) must beat.
 
 ```bash
 ./gradlew :surefold-stream-benchmarks:jmh                                    # all of it, about 3 minutes
@@ -10,11 +10,11 @@ What today's `surefold-stream` costs, measured by JMH. This is the baseline that
 ```
 
 `-PcompactHeaders` runs the measured JVMs with `-XX:+UseCompactObjectHeaders` (JEP 519, spec
-[0276](../../specs/0276-compact-object-headers.md)). Without it, the numbers stay comparable with the
+[0276](https://github.com/surefold/surefold-core/blob/main/specs/0276-compact-object-headers.md)). Without it, the numbers stay comparable with the
 baselines here.
 
 `-Pjfr` records each measured JVM with JFR into `build/jfr/<pid>.jfr`, with CPU-time sampling on Linux
-(spec [0279](../../specs/0279-jfr-profiles-on-demand.md)); `jfr view cpu-time-hot-methods` reads one. It works with
+(spec [0279](https://github.com/surefold/surefold-core/blob/main/specs/0279-jfr-profiles-on-demand.md)); `jfr view cpu-time-hot-methods` reads one. It works with
 `-PcompactHeaders` too.
 
 Results land in `build/jmh-result.json`. A new baseline is committed to `baseline/`,
@@ -118,7 +118,7 @@ were already calls in one loop, so fusing changes nothing measurable there.
 
 ## Actors beside Forks and Pekko, 2026-09-26
 
-After spec [0066](../../specs/0066-a-stream-on-actors.md): every benchmark gains an `actors` row, run on `Actors` over
+After spec [0066](https://github.com/surefold/surefold-core/blob/main/specs/0066-a-stream-on-actors.md): every benchmark gains an `actors` row, run on `Actors` over
 a scope held open for the trial, and two benchmarks are new. `ManyRunsBenchmark` starts a thousand ten-element runs
 at once and awaits them all; `HandOffBenchmark` is `merge` of two halves and `buffer(64)`, the operators that hand
 elements from one thread to another. JDK 21.0.10 on a 4 vCPU Intel Xeon @ 2.80GHz shared cloud container, 2 forks
@@ -148,7 +148,7 @@ What the rows say:
   an actor and a cell each, 1.5 KB against Forks' 0.9 KB, and every one queues for the same four runners.
 - **`groupedWithin` was slow on both, and not because of either backend.** Its feed handed each element over on its
   own with two parks and two wakes, 24–25 µs an element against Pekko's 184 ns. Spec
-  [0067](../../specs/0067-a-grouped-within-that-keeps-up.md) queues a group at a time on real time, and the `forks` row
+  [0067](https://github.com/surefold/surefold-core/blob/main/specs/0067-a-grouped-within-that-keeps-up.md) queues a group at a time on real time, and the `forks` row
   is 317 ± 33 ns against 178 ± 14 ns for the Pekko row, measured together afterwards.
 - **Both surefold backends beat Pekko on every row they share with it**, except `groupedWithin`, which is within
   twice Pekko's after 0067.
