@@ -223,6 +223,80 @@ style:
     # SystemClock.sleep parks in Waiting.kt (spec 0042) rather than calling it,
     # and everything else waits through whichever Clock the thread inherited.
     excludes: ['**/test/**', '**/example/**']
+  # Threads, latches, locks and blocking queues made by hand, in main sources (spec 0001). Each file still using one
+  # is listed below with its reason; the spec's later entries move them onto surefold's primitives.
+  ForbiddenMethodCall/threads:
+    active: true
+    methods:
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.lang.Thread.ofVirtual'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.lang.Thread.ofPlatform'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.lang.Thread.<init>'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.lang.Thread.startVirtualThread'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'kotlin.concurrent.thread'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newFixedThreadPool'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newCachedThreadPool'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newSingleThreadExecutor'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newWorkStealingPool'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Executors.newThreadPerTaskExecutor'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.ThreadPoolExecutor.<init>'
+      - reason: 'A thread started by hand belongs to no scope: fork with scope.async (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.ForkJoinPool.<init>'
+      - reason: 'A latch hands over one signal: use a Promise, Promise<Nothing, Unit> for a latch (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.CountDownLatch.<init>'
+      - reason: 'A latch hands over one signal: use a Promise, Promise<Nothing, Unit> for a latch (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.CyclicBarrier.<init>'
+      - reason: 'A latch hands over one signal: use a Promise, Promise<Nothing, Unit> for a latch (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.Phaser.<init>'
+      - reason: 'Shared state is a Shared, changed with update or in transact (AGENTS.md, spec 0001).'
+        value: 'kotlin.synchronized'
+      - reason: 'Shared state is a Shared, changed with update or in transact (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.locks.ReentrantLock.<init>'
+      - reason: 'Shared state is a Shared, changed with update or in transact (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.locks.ReentrantReadWriteLock.<init>'
+      - reason: 'Shared state is a Shared, changed with update or in transact (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.locks.StampedLock.<init>'
+      - reason: 'Values between forks go through a scope''s channel (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.LinkedBlockingQueue.<init>'
+      - reason: 'Values between forks go through a scope''s channel (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.ArrayBlockingQueue.<init>'
+      - reason: 'Values between forks go through a scope''s channel (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.SynchronousQueue.<init>'
+      - reason: 'Values between forks go through a scope''s channel (AGENTS.md, spec 0001).'
+        value: 'java.util.concurrent.LinkedTransferQueue.<init>'
+    excludes:
+      - '**/test/**'
+      - '**/testFixtures/**'
+      # A benchmark measures surefold's threads against hand-started ones, and Pekko's and Kafka's own.
+      - '**/bench/**'
+      # Kafka's keeper: a thread, a latch and a lock of its own, and core's 0309 question 3; spec 0001's second entry.
+      - '**/integrations/surefold-kafka/src/main/kotlin/dev/surefold/kafka/Keeper.kt'
+      # The offsets waiting to commit, under a lock; spec 0001's second entry.
+      - '**/integrations/surefold-kafka/src/main/kotlin/dev/surefold/kafka/Commits.kt'
+      # SQS's visibility extender: a thread and a latch, and core's 0309 question 3; spec 0001's second entry.
+      - '**/integrations/surefold-sqs/src/main/kotlin/dev/surefold/sqs/Visibility.kt'
+      # The cluster's downed hook exits the JVM from a platform thread of its own; spec 0001's third entry.
+      - '**/app/surefold-app-cluster/src/main/kotlin/dev/surefold/app/cluster/Clustered.kt'
+      # flagd's in-process resolver reads its flags from a BlockingQueue it is handed: the library's type.
+      - '**/app/surefold-app-openfeature-flagd/src/main/kotlin/dev/surefold/app/flagd/FlagdFlags.kt'
+      # The merges a layered Config remembers, under a lock; spec 0001's third entry.
+      - '**/app/surefold-app-typesafe/src/main/kotlin/dev/surefold/app/typesafe/Layered.kt'
+      # A test kit's in-memory exporter, which OpenTelemetry calls from its own threads.
+      - '**/integrations/surefold-otel-test/src/main/kotlin/dev/surefold/otel/Spans.kt'
+      # A Pekko GraphStage, which follows Pekko's threading model: the lock orders a cancel against a borrowed thread.
+      - '**/stream/surefold-stream-pekko/src/main/kotlin/dev/surefold/stream/MapParStage.kt'
   # A second instance of the rule, for main and test sources alike: the first excludes tests, which may sleep.
   ForbiddenMethodCall/runCatching:
     active: true
