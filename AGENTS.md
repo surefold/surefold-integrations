@@ -92,6 +92,21 @@ Each claim is a test. `NoOtherDependenciesTest` asserts the module's main runtim
 
 A dependency added to any module is a build failure, not a judgement call.
 
+## Surefold's primitives, not the JDK's
+
+Code here uses what surefold ships, in tests and examples too: `scope`/`async` rather than a `Thread` or an
+`ExecutorService`, `Promise` rather than a `CountDownLatch`, `Shared` rather than `synchronized` or a lock, `channel`
+rather than a `BlockingQueue`, `clock` rather than `System.nanoTime`, `testActors` and `explore` rather than real
+threads and retries, `Suite` and `surefold-assert` rather than plain JUnit. The full table is in core's
+[`SKILL.md`](https://github.com/surefold/surefold-core/blob/main/plugins/surefold/skills/surefold/SKILL.md); core's
+specs 0307 and 0309 say which code is exempt and why.
+
+A library's own threads are the library's: a Kafka client's poll loop, Pekko's dispatchers, an SDK's executor. The
+code that wraps them is not, and hands their results back through surefold's primitives rather than a latch or a
+queue of its own. The library's own test kit (an embedded broker, `TestKit`) is fine where surefold has no equivalent.
+
+An older test or module written the other way is not a pattern to copy.
+
 ## Coding standards
 
 Comments, imports, errors, effects and read-only API:
