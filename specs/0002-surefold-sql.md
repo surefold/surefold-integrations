@@ -56,16 +56,20 @@ tenant scope, as today.
 
 ## Stack
 
-- [ ] **`sql/runtime`** — `surefold-sql` with its tests, renamed, catalog path changed.
-      Done when: `./gradlew :surefold-sql:build` is green with the moved `SqlRuntimeSuite`.
-- [ ] **`sql/plugin`** — `surefold-sql-plugin` with its tests, renamed, still splicing the fixed Doorlist predicate.
-      Done when: `./gradlew :surefold-sql-plugin:build` is green with the moved `SqlPluginSuite` and `SpliceSuite`.
+Below the stack: core and this repository build with Kotlin 2.4.21, Doorlist's version, since a compiler plugin
+loads only into the compiler it was built against (surefold/surefold-core#1119, surefold/surefold-integrations#14).
+
+- [ ] **`sql/move`** — `surefold-sql` and `surefold-sql-plugin` with their tests, renamed, catalog path changed,
+      still splicing the fixed Doorlist predicate. One entry, not two: the runtime's tests need the plugin to
+      rewrite their `sql()` calls (owner, 20 November 2026). Functions over this repository's detekt limits are
+      split rather than suppressed.
+      Done when: `./gradlew :surefold-sql:build :surefold-sql-plugin:build` is green with the moved suites.
 - [ ] **`sql/tenant-options`** — `tenantColumn` and `tenantPredicate` options replace the hard-coded strings;
       `Scope.Platform` becomes `Scope.Unscoped`, the default when no tenant options are set.
       Done when: plugin stories cover both options set, neither set, one set (error), and `Scope.Tenant` with neither
       set (error), each checking the compiled text or diagnostic.
 
-Each entry may run past ~200 lines because it is a move; the reviewable part is the rename diff (`git diff -M`).
+`sql/move` runs far past ~200 lines because it is a move; the reviewable part is the diff against Doorlist's copy.
 
 ## Acceptance
 

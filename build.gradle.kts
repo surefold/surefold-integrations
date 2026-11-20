@@ -87,6 +87,10 @@ val moduleDescriptions = mapOf(
     "surefold-otel" to "surefold on OpenTelemetry: a Context that crosses a fork, so a trace survives a parMap.",
     "surefold-jdbc-otel" to "JDBC tracing with automatic query names and protective OpenTelemetry metadata defaults.",
     "surefold-jdbc-otel-bench" to "The reproducible JDBC tracing workload and telemetry pipeline for spec 0266.",
+    "surefold-sql" to
+        "Typed SQL over JDBC: sql() calls a compiler plugin turns into prepared statements and row codecs.",
+    "surefold-sql-plugin" to
+        "The Kotlin compiler plugin behind surefold-sql: rewrites sql() calls and writes the query catalog.",
     "surefold-otel-test" to
         "For tests of a traced service: a tracer that keeps the spans it ends, beside surefold-otel's storage.",
     "surefold-slf4j" to "surefold's log lines through SLF4J, with a fork's annotations in the MDC.",
