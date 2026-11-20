@@ -24,10 +24,10 @@ private val STANDARD_SCALARS = mapOf(
 /**
  * Spec 0087 rule 6: what the target database accepts, chosen by the plugin option `dialect`.
  *
- * [tenantScope] is whether a tenant-scoped statement can be spliced. The predicate is Postgres's
- * `doorlist.current_tenant()`, read under row-level security (ADR 0003); a dialect without that function refuses
- * tenant scope, so a statement must name `Scope.Platform`, rather than rest isolation on a rewrite with nothing behind
- * it. [returning] is whether a statement may end in, or read, a `returning` list.
+ * [tenantScope] is whether a tenant-scoped statement can be spliced. The predicate is a database function, such as
+ * Doorlist's `doorlist.current_tenant()` read under row-level security; a dialect without one refuses tenant scope,
+ * so a statement must name `Scope.Unscoped`, rather than rest isolation on a rewrite with nothing behind it.
+ * [returning] is whether a statement may end in, or read, a `returning` list.
  */
 internal enum class PluginDialect(
     val tenantScope: Boolean,

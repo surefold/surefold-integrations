@@ -137,14 +137,14 @@ object SpliceSuite : Suite() {
 
         test("the values tuple a batch repeats is found once, and anything else is left to a JDBC batch") {
             val tenant = "insert into p (tenant_id, a, b) values ($CALL, ?, ?)"
-            valuesTuple(tenant) shouldBe tenant.indexOf("($CALL")..tenant.lastIndexOf(')')
+            valuesTuple(tenant, TENANT) shouldBe tenant.indexOf("($CALL")..tenant.lastIndexOf(')')
             val conflict = "insert into p (a) values (?) on conflict (a) do update set n = excluded.n returning id"
-            valuesTuple(conflict) shouldBe conflict.indexOf("(?)")..conflict.indexOf("(?)") + 2
-            valuesTuple("insert into p (a) values (?), (?)") shouldBe null
-            valuesTuple("insert into p (a) values ('x')") shouldBe null
-            valuesTuple("insert into p (a) values (now())") shouldBe null
-            valuesTuple("insert into p (a) select ?") shouldBe null
-            valuesTuple("update p set a = ?") shouldBe null
+            valuesTuple(conflict, TENANT) shouldBe conflict.indexOf("(?)")..conflict.indexOf("(?)") + 2
+            valuesTuple("insert into p (a) values (?), (?)", TENANT) shouldBe null
+            valuesTuple("insert into p (a) values ('x')", TENANT) shouldBe null
+            valuesTuple("insert into p (a) values (now())", TENANT) shouldBe null
+            valuesTuple("insert into p (a) select ?", TENANT) shouldBe null
+            valuesTuple("update p set a = ?", TENANT) shouldBe null
         }
 
         test("union arms are each scoped and keep the space before the set word") {
@@ -156,15 +156,17 @@ object SpliceSuite : Suite() {
     }
 }
 
-private const val CALL = "doorlist.current_tenant()"
+private const val CALL = "app.current_tenant()"
+
+private val TENANT = Tenant("tenant_id", CALL)
 
 private fun t(alias: String): String = "$alias.tenant_id = $CALL"
 
-private fun spliced(sql: String): String = when (val result = spliceTenant(sql)) {
+private fun spliced(sql: String): String = when (val result = spliceTenant(TENANT, sql)) {
     is Splice.Ready -> result.sql
     is Splice.Broken -> "refused: ${result.message}"
 }
 
 private fun refused(sql: String) {
-    (spliceTenant(sql) is Splice.Broken) shouldBe true
+    (spliceTenant(TENANT, sql) is Splice.Broken) shouldBe true
 }

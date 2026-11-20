@@ -67,6 +67,11 @@ internal class SqlRewriter(
     private val symbols = Symbols(context, files)
     private val namesOption: String? = configuration.get(NAMES)
     private val dialectOption: String? = configuration.get(DIALECT)
+    private val tenantColumn: String? = configuration.get(TENANT_COLUMN)
+    private val tenantPredicate: String? = configuration.get(TENANT_PREDICATE)
+
+    /** What a tenant statement is spliced with. Without both options, nothing is: statements are unscoped. */
+    private val tenant: Tenant? = tenantColumn?.let { column -> tenantPredicate?.let { Tenant(column, it) } }
 
     /** Spec 0087 rule 6: what the target database accepts. Postgres unless the module names another. */
     private val dialect: PluginDialect = dialectOption?.let(::pluginDialect) ?: PluginDialect.Postgres
@@ -85,6 +90,9 @@ internal class SqlRewriter(
         if (dialectOption != null && pluginDialect(dialectOption) == null) {
             val known = PluginDialect.entries.joinToString(" or ") { it.optionName }
             report(null, module, "the dialect option is not $known")
+        }
+        if ((tenantColumn == null) != (tenantPredicate == null)) {
+            report(null, module, "tenantColumn and tenantPredicate are set together or not at all")
         }
         module.files.forEach { file -> collect(file) }
         module.accept(
@@ -180,7 +188,7 @@ internal class SqlRewriter(
             is BatchChoice.Ready -> choice.plan
         }
         if (!claim(id, sql, data.file, call)) return null
-        return Statement(id, sql, values, batch, if (batch == null) null else valuesTuple(sql))
+        return Statement(id, sql, values, batch, if (batch == null) null else valuesTuple(sql, tenant))
     }
 
     private fun queryId(call: IrCall, owner: IrSymbol, data: Walk): String? {
@@ -190,18 +198,21 @@ internal class SqlRewriter(
         return explicitId(call.argument("id"), generated, data.file, call)
     }
 
+    /** A scope left out is the module's: tenant when the tenant options are set, unscoped when they are not. */
     private fun scopeOf(call: IrCall, id: String, data: Walk): ScopeChoice? {
-        if (!hasParam(call, "scope")) return ScopeChoice.Tenant
-        val expr = call.argument("scope") ?: return ScopeChoice.Tenant
-        return when (enumEntry(expr, "dev.surefold.sql.Scope")) {
-            "Tenant" -> ScopeChoice.Tenant
-
-            "Platform" -> ScopeChoice.Platform
-
-            else -> {
-                report(data.file, call, "$id: the scope is not a constant")
-                null
-            }
+        val expr = if (hasParam(call, "scope")) call.argument("scope") else null
+        val named = expr?.let { enumEntry(it, "dev.surefold.sql.Scope").orEmpty() }
+        val problem = when {
+            named == null || named == "Unscoped" -> null
+            named == "Tenant" && tenant == null -> "Scope.Tenant needs the tenantColumn and tenantPredicate options"
+            named == "Tenant" -> null
+            else -> "the scope is not a constant"
+        }
+        problem?.let { report(data.file, call, "$id: $it") }
+        return when {
+            problem != null -> null
+            named == "Unscoped" -> ScopeChoice.Unscoped
+            else -> tenant?.let { ScopeChoice.Spliced(it) } ?: ScopeChoice.Unscoped
         }
     }
 
@@ -210,12 +221,12 @@ internal class SqlRewriter(
             report(file, call, "$id: the ${dialect.optionName} dialect has no returning")
             return null
         }
-        if (scope == ScopeChoice.Platform) return rendered
+        if (scope !is ScopeChoice.Spliced) return rendered
         if (!dialect.tenantScope) {
-            report(file, call, "$id: the ${dialect.optionName} dialect has no tenant scope; name Scope.Platform")
+            report(file, call, "$id: the ${dialect.optionName} dialect has no tenant scope; name Scope.Unscoped")
             return null
         }
-        return when (val spliced = spliceTenant(rendered)) {
+        return when (val spliced = spliceTenant(scope.tenant, rendered)) {
             is Splice.Ready -> spliced.sql
 
             is Splice.Broken -> {
@@ -698,7 +709,11 @@ private sealed interface Slot {
     class Value(val source: IrExpression, val plan: CodecPlan) : Slot
 }
 
-private enum class ScopeChoice { Tenant, Platform }
+private sealed interface ScopeChoice {
+    class Spliced(val tenant: Tenant) : ScopeChoice
+
+    object Unscoped : ScopeChoice
+}
 
 private sealed interface Columns {
     class Ready(val names: List<String>) : Columns
