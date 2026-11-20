@@ -121,8 +121,8 @@ class DoesNotCompileTest {
 
         withClue(errors.joinToString("\n")) {
             errors.joinToString("\n") shouldContain
-                "None of the following candidates is applicable because of a receiver type mismatch:\n" +
-                "fun <In, Out : Any> Pipe<Nothing, In, Out>.toFlow(): Flow<In, Out, NotUsed>"
+                "Candidate 'fun <In, Out : Any> Pipe<Nothing, In, Out>.toFlow(): Flow<In, Out, NotUsed>' " +
+                "is inapplicable because of a receiver type mismatch."
         }
     }
 
@@ -143,8 +143,8 @@ class DoesNotCompileTest {
 
         withClue(errors.joinToString("\n")) {
             errors.joinToString("\n") shouldContain
-                "None of the following candidates is applicable because of a receiver type mismatch:\n" +
-                "fun <E, L : Any, R : Any> Stream<E, Either<L, R>>.divertLefts(to: Sink<L, *>): Stream<E, R>"
+                "Candidate 'fun <E, L : Any, R : Any> Stream<E, Either<L, R>>.divertLefts(to: Sink<L, *>): Stream<E, R>' " +
+                "is inapplicable because of a receiver type mismatch."
         }
     }
 

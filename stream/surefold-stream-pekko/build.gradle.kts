@@ -29,7 +29,7 @@ dependencies {
     testImplementation("org.apache.pekko:pekko-stream-testkit_$scalaBinary")
     // The compiler, so that "this does not compile" can be a test rather than
     // a sentence in a document that goes stale.
-    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.10")
+    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.21")
     testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 

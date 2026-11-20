@@ -18,7 +18,7 @@ dependencies {
     // A broker in the test JVM, so the suite needs no Docker (spec 0161).
     testImplementation(project(":surefold-kafka-test"))
     // The compiler, so that which overload a call resolves to, and what does not compile, are tests.
-    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.10")
+    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.21")
     testImplementation("dev.surefold:surefold-assert:$surefoldCore")
 }
 
