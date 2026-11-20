@@ -143,8 +143,8 @@ class DoesNotCompileTest {
 
         withClue(errors.joinToString("\n")) {
             errors.joinToString("\n") shouldContain
-                "Candidate 'fun <E, L : Any, R : Any> Stream<E, Either<L, R>>.divertLefts(to: Sink<L, *>): Stream<E, R>' " +
-                "is inapplicable because of a receiver type mismatch."
+                "Candidate 'fun <E, L : Any, R : Any> Stream<E, Either<L, R>>" +
+                ".divertLefts(to: Sink<L, *>): Stream<E, R>' is inapplicable because of a receiver type mismatch."
         }
     }
 
