@@ -11,7 +11,7 @@ dependencies {
     testImplementation("org.apache.pekko:pekko-actor-testkit-typed_$scalaBinary:$pekkoVersion")
     // The Kotlin compiler in the test JVM, so the guides' examples are compiled
     // rather than believed.
-    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.10")
+    testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:2.4.21")
     // For the configuration guide's examples, which read a section from a @Serializable class.
     testImplementation(project(":surefold-app-kotlinx"))
     // For the flags guide, which declares and reads flags over the OpenFeature SDK.
@@ -30,7 +30,7 @@ val serializationPlugin: Configuration by configurations.creating {
 }
 
 dependencies {
-    serializationPlugin("org.jetbrains.kotlin:kotlin-serialization-compiler-plugin-embeddable:2.4.10")
+    serializationPlugin("org.jetbrains.kotlin:kotlin-serialization-compiler-plugin-embeddable:2.4.21")
 }
 
 val repoRoot = rootProject.projectDir.absolutePath

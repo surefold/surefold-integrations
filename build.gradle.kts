@@ -1,9 +1,9 @@
 plugins {
-    kotlin("jvm") version "2.4.10" apply false
+    kotlin("jvm") version "2.4.21" apply false
     // @Serializable classes: surefold-actor-remote-kotlinx's tests, and the services that use it (spec 0093).
-    kotlin("plugin.serialization") version "2.4.10" apply false
+    kotlin("plugin.serialization") version "2.4.21" apply false
     // A failed `expect` in surefold-junit's suites draws its values (spec 0175).
-    kotlin("plugin.power-assert") version "2.4.10" apply false
+    kotlin("plugin.power-assert") version "2.4.21" apply false
     id("com.diffplug.spotless") version "8.10.0"
     id("dev.detekt") version "2.0.0-alpha.6" apply false
     id("org.jetbrains.kotlinx.kover") version "0.9.9"
@@ -54,7 +54,7 @@ val ktlintVersion = "1.8.0"
  * compile, or quietly in their editor, and a version number repeated in three build scripts is three
  * chances for that to happen on a bump.
  */
-val kotlinVersion: String = "2.4.10"
+val kotlinVersion: String = "2.4.21"
 
 // Spotless does not pick these up from .editorconfig for every source set, so
 // they are handed to the ktlint step directly. The reasoning for each lives in
