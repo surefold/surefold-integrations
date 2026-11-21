@@ -17,6 +17,13 @@ tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKotlin"
     compilerOptions.freeCompilerArgs.addAll(
         testCatalog.map { file -> listOf("-P", "plugin:dev.surefold.sql:catalog=${file.asFile.absolutePath}") },
     )
+    // The tests read tenant statements as a tenant-scoped application would compile them.
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:dev.surefold.sql:tenantColumn=tenant_id",
+        "-P",
+        "plugin:dev.surefold.sql:tenantPredicate=app.current_tenant()",
+    )
 }
 
 tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {

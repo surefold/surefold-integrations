@@ -26,7 +26,7 @@ object SqlPluginSuite : Suite() {
                 ),
             )
             val catalog = compiled.catalog.readText()
-            val booked = "select id from bookings where bookings.tenant_id = doorlist.current_tenant() and id = ?"
+            val booked = "select id from bookings where bookings.tenant_id = app.current_tenant() and id = ?"
             catalog.contains("alpha.find $booked") shouldBe true
             catalog.contains("alpha.same $booked") shouldBe true
         }
@@ -152,7 +152,7 @@ object SqlPluginSuite : Suite() {
                     """.trimIndent(),
                 ),
             )
-            val where = "where bookings.tenant_id = doorlist.current_tenant() and id = ?"
+            val where = "where bookings.tenant_id = app.current_tenant() and id = ?"
             trimmed.catalog.readText().contains("select id\\nfrom bookings\\n$where") shouldBe true
             val named = ok(
                 "ident",
@@ -166,7 +166,7 @@ object SqlPluginSuite : Suite() {
                 ),
             )
             val listed = "Questions.listed select id from bookings where bookings.tenant_id = " +
-                "doorlist.current_tenant()"
+                "app.current_tenant()"
             named.catalog.readText().contains(listed) shouldBe true
             val slots = ok(
                 "value-class",
@@ -195,7 +195,7 @@ object SqlPluginSuite : Suite() {
                     """.trimIndent(),
                 ),
             )
-            val call = "doorlist.current_tenant()"
+            val call = "app.current_tenant()"
             val inserted = "Questions.insert insert into people (tenant_id, name, age) values ($call, ?, ?)"
             people.catalog.readText().contains(inserted) shouldBe true
             mentions(people, "sample/Questions.class", "dataCodec") shouldBe true
@@ -347,7 +347,7 @@ object SqlPluginSuite : Suite() {
             )
             val lines = compiled.catalog.readText().lines()
             val courts = lines.first { it.startsWith("Questions.courts ") }
-            val call = "doorlist.current_tenant()"
+            val call = "app.current_tenant()"
             courts.contains("resources.tenant_id = $call") shouldBe true
             courts.count { it == '?' } shouldBe 1
             val paid = lines.first { it.startsWith("Questions.paid ") }
@@ -367,13 +367,13 @@ object SqlPluginSuite : Suite() {
                     """
                 import dev.surefold.sql.Scope
                 object Questions {
-                    fun read(id: UUID) = sql("select id from bookings where id = ${'$'}id", Scope.Platform)
+                    fun read(id: UUID) = sql("select id from bookings where id = ${'$'}id", Scope.Unscoped)
                 }
                     """.trimIndent(),
                 ),
             )
             val catalog = compiled.catalog.readText()
-            catalog.contains("doorlist.current_tenant()") shouldBe false
+            catalog.contains("app.current_tenant()") shouldBe false
             catalog.contains("Questions.read select id from bookings where id = ?") shouldBe true
         }
 
@@ -399,7 +399,7 @@ object SqlPluginSuite : Suite() {
                 ),
             )
             val lines = compiled.catalog.readText().lines()
-            val call = "doorlist.current_tenant()"
+            val call = "app.current_tenant()"
             val due = lines.first { it.startsWith("Questions.due ") }
             due.contains("jobs.tenant_id = $call") shouldBe true
             due.contains("due.tenant_id") shouldBe false
@@ -505,7 +505,7 @@ object SqlPluginSuite : Suite() {
         test("the dialect option must name a dialect the plugin knows") {
             refused(
                 "dialect-unknown",
-                snippet("object Questions { fun one() = sql(\"select 1\", dev.surefold.sql.Scope.Platform) }"),
+                snippet("object Questions { fun one() = sql(\"select 1\", dev.surefold.sql.Scope.Unscoped) }"),
                 "the dialect option is not postgres or standard",
                 dialect = "nonsense",
             )
@@ -533,7 +533,7 @@ object SqlPluginSuite : Suite() {
                     """
                 object Questions {
                     fun add(name: String) =
-                        sql("insert into people (name) values (${'$'}name) returning id", dev.surefold.sql.Scope.Platform)
+                        sql("insert into people (name) values (${'$'}name) returning id", dev.surefold.sql.Scope.Unscoped)
                             .returning<UUID>()
                 }
                     """.trimIndent(),
@@ -547,7 +547,7 @@ object SqlPluginSuite : Suite() {
                     """
                 object Questions {
                     fun add(name: String) =
-                        sql("insert into people (name) values (${'$'}name) returning id", dev.surefold.sql.Scope.Platform)
+                        sql("insert into people (name) values (${'$'}name) returning id", dev.surefold.sql.Scope.Unscoped)
                 }
                     """.trimIndent(),
                 ),
@@ -562,7 +562,7 @@ object SqlPluginSuite : Suite() {
                 snippet(
                     """
                 object Questions {
-                    fun byId(id: UUID) = sql("select name from people where id = ${'$'}id", dev.surefold.sql.Scope.Platform)
+                    fun byId(id: UUID) = sql("select name from people where id = ${'$'}id", dev.surefold.sql.Scope.Unscoped)
                         .query<String>()
                 }
                     """.trimIndent(),
@@ -579,7 +579,7 @@ object SqlPluginSuite : Suite() {
                 }
                     """.trimIndent(),
                 ),
-                "Questions.named: the standard dialect has no tenant scope; name Scope.Platform",
+                "Questions.named: the standard dialect has no tenant scope; name Scope.Unscoped",
                 dialect = "standard",
             )
             val plain = ok(
@@ -590,7 +590,7 @@ object SqlPluginSuite : Suite() {
                     fun named(name: String, age: Int) =
                         sql(
                             "select name from people where name = ${'$'}name and age = ${'$'}age",
-                            dev.surefold.sql.Scope.Platform,
+                            dev.surefold.sql.Scope.Unscoped,
                         ).query<String>()
                 }
                     """.trimIndent(),
@@ -612,16 +612,29 @@ object SqlPluginSuite : Suite() {
     }
 }
 
-private class Compiled(val code: ExitCode, val log: String, val catalog: File, val classes: File)
+internal class Compiled(val code: ExitCode, val log: String, val catalog: File, val classes: File)
 
-private fun ok(name: String, source: String, names: String? = null, dialect: String? = null): Compiled {
-    val compiled = compile(name, source, names, dialect)
+internal fun ok(
+    name: String,
+    source: String,
+    names: String? = null,
+    dialect: String? = null,
+    tenant: List<String> = TENANT_OPTIONS,
+): Compiled {
+    val compiled = compile(name, source, names, dialect, tenant)
     if (compiled.code != ExitCode.OK) compiled.log shouldBe "compilation failed"
     return compiled
 }
 
-private fun refused(name: String, source: String, needle: String, names: String? = null, dialect: String? = null) {
-    val compiled = compile(name, source, names, dialect)
+internal fun refused(
+    name: String,
+    source: String,
+    needle: String,
+    names: String? = null,
+    dialect: String? = null,
+    tenant: List<String> = TENANT_OPTIONS,
+) {
+    val compiled = compile(name, source, names, dialect, tenant)
     compiled.code shouldBe ExitCode.COMPILATION_ERROR
     if (!compiled.log.lowercase().contains(needle.lowercase())) compiled.log shouldBe needle
 }
@@ -631,7 +644,7 @@ private fun mentions(compiled: Compiled, classFile: String, symbol: String): Boo
     return String(bytes, Charsets.ISO_8859_1).contains(symbol)
 }
 
-private fun snippet(body: String): String = """
+internal fun snippet(body: String): String = """
     package sample
 
     import dev.surefold.sql.query
@@ -642,7 +655,22 @@ private fun snippet(body: String): String = """
     $body
 """.trimIndent()
 
-private fun compile(name: String, source: String, names: String? = null, dialect: String? = null): Compiled {
+/** The tenant options every story compiles with unless it names others. */
+internal val TENANT_OPTIONS = tenantOptions("tenant_id", "app.current_tenant()")
+
+internal fun tenantOptions(column: String?, predicate: String?): List<String> =
+    listOfNotNull(
+        column?.let { "plugin:dev.surefold.sql:tenantColumn=$it" },
+        predicate?.let { "plugin:dev.surefold.sql:tenantPredicate=$it" },
+    ).flatMap { listOf("-P", it) }
+
+private fun compile(
+    name: String,
+    source: String,
+    names: String? = null,
+    dialect: String? = null,
+    tenant: List<String> = TENANT_OPTIONS,
+): Compiled {
     val root = File("build/snippets/$name")
     root.deleteRecursively()
     root.mkdirs()
@@ -669,7 +697,7 @@ private fun compile(name: String, source: String, names: String? = null, dialect
         "-Xplugin=$plugin",
         "-P",
         "plugin:dev.surefold.sql:catalog=${catalog.absolutePath}",
-    ) + namesArg + dialectArg + file.absolutePath
+    ) + namesArg + dialectArg + tenant + file.absolutePath
     val code = PrintStream(captured, true, Charsets.UTF_8).use { stream ->
         K2JVMCompiler().exec(stream, *options.toTypedArray())
     }

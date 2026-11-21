@@ -1,6 +1,7 @@
 package dev.surefold.sql.plugin
 
-private const val TENANT_CALL = "doorlist.current_tenant()"
+/** The plugin's tenant options: [column] on every tenant table equals [predicate], the SQL that reads the tenant. */
+internal class Tenant(val column: String, val predicate: String)
 
 private const val UNNAMED = "a from or insert target is not a table the plugin can name"
 
@@ -20,16 +21,21 @@ private val RESERVED = CLAUSE + JOIN_WORD + setOf("on", "using", "as")
  * placeholders and the tenant call, and nothing but `on conflict` or `returning` follows. Otherwise null, and a batch
  * of the statement runs as a JDBC batch.
  */
-internal fun valuesTuple(sql: String): IntRange? {
+internal fun valuesTuple(sql: String, tenant: Tenant?): IntRange? {
     val tokens = tokenize(sql) ?: return null
     val first = tokens.firstOrNull { it.depth == 0 && it.word } ?: return null
     if (!first.isWord("insert")) return null
     val values = findWord(tokens, 0, "values") ?: return null
     val open = tupleOpens(tokens, values + 1, emptyList())?.singleOrNull() ?: return null
     val close = matchingClose(tokens, open) ?: return null
-    val inside = sql.substring(tokens[open].end, tokens[close].start).replace(TENANT_CALL, "")
-    if (!inside.all { it == '?' || it == ',' || it.isWhitespace() }) return null
-    return tokens[open].start..tokens[close].start
+    val placeholders = onlyPlaceholders(sql.substring(tokens[open].end, tokens[close].start), tenant)
+    return if (placeholders) tokens[open].start..tokens[close].start else null
+}
+
+/** Whether a values tuple holds nothing but placeholders, once the tenant predicate the splice added is set aside. */
+private fun onlyPlaceholders(tuple: String, tenant: Tenant?): Boolean {
+    val inside = tenant?.let { tuple.replace(it.predicate, "") } ?: tuple
+    return inside.all { it == '?' || it == ',' || it.isWhitespace() }
 }
 
 /** Whether the statement has a `returning` list of its own; one inside a subquery or a string is not counted. */
@@ -42,26 +48,26 @@ internal sealed interface Splice {
 }
 
 /**
- * Adds `alias.tenant_id = doorlist.current_tenant()` for each real table. A CTE name is not a table.
- * Platform text never comes here.
+ * Adds `alias.column = predicate` from [tenant] for each real table. A CTE name is not a table.
+ * Unscoped text never comes here.
  */
-internal fun spliceTenant(sql: String): Splice = spliceDeep(sql, emptySet())
+internal fun spliceTenant(tenant: Tenant, sql: String): Splice = spliceDeep(tenant, sql, emptySet())
 
 /**
  * Splices every subquery (`in (select …)`, `exists (…)`, a scalar subquery in a select list or `set`) and then the
  * statement itself. A CTE body is left to [spliceWith], which knows which names it can see.
  */
-private fun spliceDeep(sql: String, ctes: Set<String>): Splice {
+private fun spliceDeep(tenant: Tenant, sql: String, ctes: Set<String>): Splice {
     val tokens = tokenize(sql) ?: return Splice.Broken(UNNAMED)
     val visible = ctes + declaredCtes(tokens)
     val edits = subqueries(tokens).map { (open, close) ->
         val inner = sql.substring(tokens[open].end, tokens[close].start)
-        when (val spliced = spliceDeep(inner, visible)) {
+        when (val spliced = spliceDeep(tenant, inner, visible)) {
             is Splice.Broken -> return spliced
             is Splice.Ready -> Replace(tokens[open].end, tokens[close].start, spliced.sql)
         }
     }
-    return spliceStatement(replaceAll(sql, edits), ctes)
+    return spliceStatement(tenant, replaceAll(sql, edits), ctes)
 }
 
 /** The names a leading `with` declares, so a subquery in its main statement does not splice a CTE as a table. */
@@ -95,15 +101,15 @@ private fun isCteBody(tokens: List<Tok>, open: Int): Boolean {
     return before.word && before.text.lowercase() in setOf("as", "materialized")
 }
 
-private fun spliceStatement(sql: String, ctes: Set<String>): Splice {
+private fun spliceStatement(tenant: Tenant, sql: String, ctes: Set<String>): Splice {
     val tokens = tokenize(sql) ?: return Splice.Broken(UNNAMED)
     val keyword = tokens.firstOrNull { it.depth == 0 && it.word } ?: return Splice.Broken(UNNAMED)
     return when (keyword.text.lowercase()) {
-        "select" -> spliceSelect(sql, tokens, ctes)
-        "update" -> spliceUpdate(sql, tokens, ctes)
-        "delete" -> spliceDelete(sql, tokens, ctes)
-        "insert" -> spliceInsert(sql, tokens, ctes)
-        "with" -> spliceWith(sql, tokens, ctes)
+        "select" -> spliceSelect(tenant, sql, tokens, ctes)
+        "update" -> spliceUpdate(tenant, sql, tokens, ctes)
+        "delete" -> spliceDelete(tenant, sql, tokens, ctes)
+        "insert" -> spliceInsert(tenant, sql, tokens, ctes)
+        "with" -> spliceWith(tenant, sql, tokens, ctes)
         else -> Splice.Broken(UNNAMED)
     }
 }
@@ -180,23 +186,23 @@ private tailrec fun wordEnd(sql: String, index: Int): Int = when {
     else -> index
 }
 
-private fun spliceSelect(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceSelect(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val cut = tokens.indexOfFirst { it.depth == 0 && it.word && it.text.lowercase() in SET_WORD }
-    if (cut >= 0) return spliceArms(sql, tokens, cut, ctes)
-    return spliceOneSelect(sql, tokens, ctes)
+    if (cut >= 0) return spliceArms(tenant, sql, tokens, cut, ctes)
+    return spliceOneSelect(tenant, sql, tokens, ctes)
 }
 
-private fun spliceArms(sql: String, tokens: List<Tok>, cut: Int, ctes: Set<String>): Splice {
+private fun spliceArms(tenant: Tenant, sql: String, tokens: List<Tok>, cut: Int, ctes: Set<String>): Splice {
     val keyword = tokens[cut]
     val right = afterSetWord(tokens, cut) ?: return Splice.Broken(UNNAMED)
     val leftSql = sql.substring(0, keyword.start)
     val leftTokens = tokenize(leftSql) ?: return Splice.Broken(UNNAMED)
-    val left = when (val spliced = spliceOneSelect(leftSql, leftTokens, ctes)) {
+    val left = when (val spliced = spliceOneSelect(tenant, leftSql, leftTokens, ctes)) {
         is Splice.Broken -> return spliced
         is Splice.Ready -> spliced.sql
     }
     val rightSql = sql.substring(tokens[right].start)
-    val rest = when (val spliced = spliceStatement(rightSql, ctes)) {
+    val rest = when (val spliced = spliceStatement(tenant, rightSql, ctes)) {
         is Splice.Broken -> return spliced
         is Splice.Ready -> spliced.sql
     }
@@ -210,7 +216,7 @@ private fun afterSetWord(tokens: List<Tok>, cut: Int): Int? {
     return start.takeIf { tokens.getOrNull(it) != null }
 }
 
-private fun spliceOneSelect(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceOneSelect(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val from = findWord(tokens, 0, "from") ?: return Splice.Ready(sql)
     return when (val parsed = parseFromList(tokens, from + 1)) {
         is FromParse.Broken -> Splice.Broken(UNNAMED)
@@ -220,14 +226,16 @@ private fun spliceOneSelect(sql: String, tokens: List<Tok>, ctes: Set<String>): 
             if (names.isEmpty()) {
                 Splice.Ready(sql)
             } else {
-                val edits = scopedEdits(sql, names) { inner -> predicateEdit(sql, tokens, parsed.cursor, inner) }
+                val edits = scopedEdits(tenant, sql, names) { inner ->
+                    predicateEdit(tenant, sql, tokens, parsed.cursor, inner)
+                }
                 Splice.Ready(apply(sql, edits))
             }
         }
     }
 }
 
-private fun spliceUpdate(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceUpdate(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val set = findWord(tokens, 0, "set") ?: return Splice.Broken(UNNAMED)
     val target = parseItem(tokens, 1)
     if (target !is Item.Ready || target.cursor != set) return Splice.Broken(UNNAMED)
@@ -242,11 +250,11 @@ private fun spliceUpdate(sql: String, tokens: List<Tok>, ctes: Set<String>): Spl
     val names = (listOf(target.name) + parsed.names).stored(ctes)
     if (names.isEmpty()) return Splice.Ready(sql)
     val where = findWord(tokens, set + 1, "where")
-    val edits = scopedEdits(sql, names) { inner ->
+    val edits = scopedEdits(tenant, sql, names) { inner ->
         if (where != null) {
-            afterWhere(sql, tokens, where, inner)
+            afterWhere(tenant, sql, tokens, where, inner)
         } else {
-            listOf(beforeClause(sql, updateInsertAt(sql, tokens, from, parsed.cursor), inner))
+            listOf(beforeClause(tenant, sql, updateInsertAt(sql, tokens, from, parsed.cursor), inner))
         }
     }
     return Splice.Ready(apply(sql, edits))
@@ -258,7 +266,7 @@ private fun updateInsertAt(sql: String, tokens: List<Tok>, from: Int?, fromCurso
     return if (returning == null) sql.length else tokens[returning].start
 }
 
-private fun spliceDelete(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceDelete(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val from = findWord(tokens, 0, "from") ?: return Splice.Broken(UNNAMED)
     val target = parseItem(tokens, from + 1)
     if (target !is Item.Ready) return Splice.Broken(UNNAMED)
@@ -272,11 +280,11 @@ private fun spliceDelete(sql: String, tokens: List<Tok>, ctes: Set<String>): Spl
     if (stopsAtSet(tokens, parsed.cursor)) return Splice.Broken(UNNAMED)
     val names = (listOf(target.name) + parsed.names).stored(ctes)
     if (names.isEmpty()) return Splice.Ready(sql)
-    val edits = scopedEdits(sql, names) { inner -> predicateEdit(sql, tokens, parsed.cursor, inner) }
+    val edits = scopedEdits(tenant, sql, names) { inner -> predicateEdit(tenant, sql, tokens, parsed.cursor, inner) }
     return Splice.Ready(apply(sql, edits))
 }
 
-private fun spliceInsert(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceInsert(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val into = findWord(tokens, 0, "into") ?: return Splice.Broken(UNNAMED)
     val target = parseItem(tokens, into + 1, columnList = true)
     if (target !is Item.Ready) return Splice.Broken(UNNAMED)
@@ -284,23 +292,31 @@ private fun spliceInsert(sql: String, tokens: List<Tok>, ctes: Set<String>): Spl
     if (open == null || open.text != "(" || open.depth != 0) return Splice.Broken(UNNAMED)
     val close = matchingClose(tokens, target.cursor) ?: return Splice.Broken(UNNAMED)
     val values = findWord(tokens, close + 1, "values")
-    if (values != null) return spliceValues(sql, tokens, open.end, tokens[close].start, values)
+    if (values != null) return spliceValues(tenant, sql, tokens, open.end, tokens[close].start, values)
     val select = findWord(tokens, close + 1, "select") ?: return Splice.Broken(UNNAMED)
-    return spliceInsertSelect(sql, tokens, ctes, open.end, tokens[close].start, select)
+    return spliceInsertSelect(tenant, sql, tokens, ctes, open.end, tokens[close].start, select)
 }
 
-private fun spliceValues(sql: String, tokens: List<Tok>, openEnd: Int, closeStart: Int, values: Int): Splice {
+private fun spliceValues(
+    tenant: Tenant,
+    sql: String,
+    tokens: List<Tok>,
+    openEnd: Int,
+    closeStart: Int,
+    values: Int,
+): Splice {
     val tuples = tupleOpens(tokens, values + 1, emptyList()) ?: return Splice.Broken(UNNAMED)
     if (tuples.isEmpty()) return Splice.Broken(UNNAMED)
-    val columns = insertAt(openEnd, sql, closeStart, "tenant_id")
+    val columns = insertAt(openEnd, sql, closeStart, tenant.column)
     val rows = tuples.map { index ->
         val end = matchingClose(tokens, index) ?: return Splice.Broken(UNNAMED)
-        insertAt(tokens[index].end, sql, tokens[end].start, TENANT_CALL)
+        insertAt(tokens[index].end, sql, tokens[end].start, tenant.predicate)
     }
     return Splice.Ready(apply(sql, listOf(columns) + rows))
 }
 
 private fun spliceInsertSelect(
+    tenant: Tenant,
     sql: String,
     tokens: List<Tok>,
     ctes: Set<String>,
@@ -311,11 +327,11 @@ private fun spliceInsertSelect(
     val conflict = onConflictAt(tokens, select)
     val selectEnd = if (conflict == null) sql.length else tokens[conflict].start
     val selectSql = sql.substring(tokens[select].start, selectEnd)
-    val valued = when (val spliced = spliceStatement(selectSql, ctes)) {
+    val valued = when (val spliced = spliceStatement(tenant, selectSql, ctes)) {
         is Splice.Broken -> return spliced
-        is Splice.Ready -> prependSelectItem(spliced.sql)
+        is Splice.Ready -> prependSelectItem(tenant, spliced.sql)
     }
-    val column = if (sql.substring(openEnd, closeStart).isBlank()) "tenant_id" else "tenant_id, "
+    val column = if (sql.substring(openEnd, closeStart).isBlank()) tenant.column else "${tenant.column}, "
     val withColumn = sql.substring(0, openEnd) + column + sql.substring(openEnd)
     val shift = column.length
     val at = tokens[select].start + shift
@@ -330,10 +346,10 @@ private tailrec fun onConflictAt(tokens: List<Tok>, from: Int): Int? {
     return onConflictAt(tokens, on + 1)
 }
 
-private fun prependSelectItem(sql: String): String {
+private fun prependSelectItem(tenant: Tenant, sql: String): String {
     val after = "select".length
     val mark = distinctMark(sql.substring(after))
-    return sql.substring(0, after + mark) + " $TENANT_CALL," + sql.substring(after + mark)
+    return sql.substring(0, after + mark) + " ${tenant.predicate}," + sql.substring(after + mark)
 }
 
 private fun distinctMark(tail: String): Int {
@@ -361,18 +377,18 @@ private tailrec fun closeWord(text: String, open: Int, index: Int = open + 1, de
     return closeWord(text, open, index + 1, next)
 }
 
-private fun spliceWith(sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
+private fun spliceWith(tenant: Tenant, sql: String, tokens: List<Tok>, ctes: Set<String>): Splice {
     val recursive = tokens.getOrNull(1)?.isWord("recursive") == true
     val start = if (recursive) 2 else 1
     val parsed = readCtes(tokens, start, ctes, emptyList()) ?: return Splice.Broken(UNNAMED)
     val main = tokens.getOrNull(parsed.cursor) ?: return Splice.Broken(UNNAMED)
-    val mainSql = when (val spliced = spliceStatement(sql.substring(main.start), parsed.names)) {
+    val mainSql = when (val spliced = spliceStatement(tenant, sql.substring(main.start), parsed.names)) {
         is Splice.Broken -> return spliced
         is Splice.Ready -> spliced.sql
     }
     val bodies = parsed.bodies.map { body ->
         val inner = sql.substring(body.contentStart, body.contentEnd)
-        val text = when (val spliced = spliceDeep(inner, if (recursive) parsed.names else body.visible)) {
+        val text = when (val spliced = spliceDeep(tenant, inner, if (recursive) parsed.names else body.visible)) {
             is Splice.Broken -> return spliced
             is Splice.Ready -> spliced.sql
         }
@@ -425,12 +441,18 @@ private fun insertAt(at: Int, sql: String, close: Int, text: String): Pair<Int, 
     return at to if (empty) text else "$text, "
 }
 
-private fun predicateEdit(sql: String, tokens: List<Tok>, cursor: Int, names: List<Named>): List<Pair<Int, String>> {
+private fun predicateEdit(
+    tenant: Tenant,
+    sql: String,
+    tokens: List<Tok>,
+    cursor: Int,
+    names: List<Named>,
+): List<Pair<Int, String>> {
     val token = tokens.getOrNull(cursor)
     return if (token != null && token.isWord("where")) {
-        afterWhere(sql, tokens, cursor, names)
+        afterWhere(tenant, sql, tokens, cursor, names)
     } else {
-        listOf(beforeClause(sql, clauseStart(sql, tokens, cursor), names))
+        listOf(beforeClause(tenant, sql, clauseStart(sql, tokens, cursor), names))
     }
 }
 
@@ -438,10 +460,16 @@ private fun predicateEdit(sql: String, tokens: List<Tok>, cursor: Int, names: Li
  * The predicate goes first, and `and` binds tighter than `or`: a condition with a top-level `or` is parenthesised,
  * or its second arm would match rows of any tenant. No other operator binds looser than `and`, so the rest stay bare.
  */
-private fun afterWhere(sql: String, tokens: List<Tok>, where: Int, names: List<Named>): List<Pair<Int, String>> {
+private fun afterWhere(
+    tenant: Tenant,
+    sql: String,
+    tokens: List<Tok>,
+    where: Int,
+    names: List<Named>,
+): List<Pair<Int, String>> {
     val end = tokens.indices.firstOrNull { it > where && endsWhere(tokens[it]) }
     val alternatives = (where + 1 until (end ?: tokens.size)).any { tokens[it].isWord("or") }
-    if (!alternatives) return listOf(tokens[where].end to " ${predicate(names)} and")
+    if (!alternatives) return listOf(tokens[where].end to " ${predicate(tenant, names)} and")
     val close = when {
         end != null -> tokens[end].start to ") "
 
@@ -450,7 +478,7 @@ private fun afterWhere(sql: String, tokens: List<Tok>, where: Int, names: List<N
         // Before any trailing space: an insert's select is spliced apart from the `on conflict` that follows it.
         else -> sql.trimEnd().length to ")"
     }
-    return listOf(tokens[where].end to " ${predicate(names)} and (", close)
+    return listOf(tokens[where].end to " ${predicate(tenant, names)} and (", close)
 }
 
 /** A where's condition runs to the next of these at its own depth; `from` is not one (`is distinct from`). */
@@ -461,17 +489,17 @@ private val AFTER_WHERE = setOf(
 
 private fun endsWhere(token: Tok): Boolean = token.depth == 0 && token.word && token.text.lowercase() in AFTER_WHERE
 
-private fun beforeClause(sql: String, at: Int, names: List<Named>): Pair<Int, String> {
+private fun beforeClause(tenant: Tenant, sql: String, at: Int, names: List<Named>): Pair<Int, String> {
     val lead = if (at > 0 && !sql[at - 1].isWhitespace()) " " else ""
     val trail = if (at < sql.length && !sql[at].isWhitespace()) " " else ""
-    return at to "${lead}where ${predicate(names)}$trail"
+    return at to "${lead}where ${predicate(tenant, names)}$trail"
 }
 
 private fun clauseStart(sql: String, tokens: List<Tok>, cursor: Int): Int =
     tokens.getOrNull(cursor)?.start ?: sql.length
 
-private fun predicate(names: List<Named>): String =
-    names.joinToString(" and ") { "${it.qualifier}.tenant_id = $TENANT_CALL" }
+private fun predicate(tenant: Tenant, names: List<Named>): String =
+    names.joinToString(" and ") { "${it.qualifier}.${tenant.column} = ${tenant.predicate}" }
 
 private fun List<Named>.stored(ctes: Set<String>): List<Named> = filter { name ->
     !name.function && ctes.none { it.equals(name.table.substringAfterLast('.'), ignoreCase = true) }
@@ -495,22 +523,23 @@ private class OnSpan(val onEnd: Int, val next: Int?)
  * left join keeps its unmatched rows.
  */
 private fun scopedEdits(
+    tenant: Tenant,
     sql: String,
     names: List<Named>,
     inner: (List<Named>) -> List<Pair<Int, String>>,
 ): List<Pair<Int, String>> {
     val (outer, plain) = names.partition { it.on != null }
     val wherePart = if (plain.isEmpty()) emptyList() else inner(plain)
-    return wherePart + outer.flatMap { name -> name.on?.let { onEdits(sql, name, it) }.orEmpty() }
+    return wherePart + outer.flatMap { name -> name.on?.let { onEdits(tenant, sql, name, it) }.orEmpty() }
 }
 
-private fun onEdits(sql: String, name: Named, on: OnSpan): List<Pair<Int, String>> {
+private fun onEdits(tenant: Tenant, sql: String, name: Named, on: OnSpan): List<Pair<Int, String>> {
     val close = when {
         on.next != null -> on.next to ") "
         sql.substring(on.onEnd).contains("--") -> sql.length to "\n)"
         else -> sql.length to ")"
     }
-    return listOf(on.onEnd to " ${predicate(listOf(name))} and (", close)
+    return listOf(on.onEnd to " ${predicate(tenant, listOf(name))} and (", close)
 }
 
 private sealed interface FromParse {

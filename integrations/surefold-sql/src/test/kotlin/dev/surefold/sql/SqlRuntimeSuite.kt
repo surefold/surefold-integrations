@@ -130,7 +130,7 @@ object SqlRuntimeSuite : Suite() {
             val codec = personCodec()
             val people = List(BATCH_ROWS) { index -> Person("person-$index", index, LocalDate.of(2020, 1, 1)) }
             val memory = RecordingJdbc.Memory()
-            val call = "doorlist.current_tenant()"
+            val call = "app.current_tenant()"
             val text = "insert into people (tenant_id, name, age, born) values ($call, ?, ?, ?)"
             val frag = insert("people.tenant", text, codec)
             frag.batch(RecordingJdbc.connection(memory), people).shouldBeRight() shouldBe 2
@@ -635,7 +635,7 @@ object SqlRuntimeSuite : Suite() {
             val people = RecordingJdbc.Memory()
             val rows = listOf(PersonRow("Ada", 30), PersonRow("Bea", 31))
             PeopleSql.insert(rows[0]).batch(RecordingJdbc.connection(people), rows).shouldBeRight() shouldBe 1
-            val call = "doorlist.current_tenant()"
+            val call = "app.current_tenant()"
             val widened = "insert into people (tenant_id, name, age) values ($call, ?, ?), ($call, ?, ?)"
             people.calls.single().sql shouldBe widened
             people.calls.single().parameters shouldBe listOf("Ada", 30, "Bea", 31)
@@ -766,7 +766,7 @@ private fun codecNames(holder: Class<*>): Set<String> =
 private fun tuples(sql: String): Int = Regex("""\(\?, \?, \?\)""").findAll(sql).count()
 
 private fun whereTenant(table: String, predicate: String): String =
-    "where $table.tenant_id = doorlist.current_tenant() and $predicate"
+    "where $table.tenant_id = app.current_tenant() and $predicate"
 
 private data class Seen<A>(val value: A, val ran: Thread, val caller: Thread)
 
