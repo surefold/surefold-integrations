@@ -1,0 +1,160 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-stream-pekko",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-bom_2.13",
+          "version": {
+            "requires": "1.2.1"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-stream_2.13"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 78947,
+          "sha512": "25ca7229f93c2c27d18b49598940930f4f4137dceae9cd9cb074c646435162f1ccef5eed3440327bed972c05d255e06a14fda8e16ccb99835f11ffce0830530e",
+          "sha256": "83390e287f9130753690d7599437df27e54279bb61c194a2d550a1cf77982c4b",
+          "sha1": "1f9ed2fc77108ecfd86161d05743d216c83b125d",
+          "md5": "3ae8661528e0fb34e9b87b91cc211682"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-bom_2.13",
+          "version": {
+            "requires": "1.2.1"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-stream_2.13"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 78947,
+          "sha512": "25ca7229f93c2c27d18b49598940930f4f4137dceae9cd9cb074c646435162f1ccef5eed3440327bed972c05d255e06a14fda8e16ccb99835f11ffce0830530e",
+          "sha256": "83390e287f9130753690d7599437df27e54279bb61c194a2d550a1cf77982c4b",
+          "sha1": "1f9ed2fc77108ecfd86161d05743d216c83b125d",
+          "md5": "3ae8661528e0fb34e9b87b91cc211682"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-stream-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 17133,
+          "sha512": "a7554f9611aee6a8d4af4ab11d8bb5e70b27d00f7e0d64a022e3380e142f25fb9f19aa7c4ba3c374c748ff5592b243c6a282738e8cceea3b1a6a1dc6dfb5ed2e",
+          "sha256": "8617e0a18aef554c6216a02d69fad6ca6b059c900597952bd1f086523e44ccd3",
+          "sha1": "a94397b9501fe29ef017cf50c3c3dfc345e9b41c",
+          "md5": "b57e23102da2365ad0a710707756b341"
+        }
+      ]
+    }
+  ]
+}

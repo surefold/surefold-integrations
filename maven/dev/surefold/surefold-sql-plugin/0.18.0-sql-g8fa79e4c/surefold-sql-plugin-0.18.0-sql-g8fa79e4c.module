@@ -1,0 +1,102 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-sql-plugin",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c.jar",
+          "size": 157290,
+          "sha512": "e7f28f33d85fbd27f7edc83c6b435d1bb16b00260935354c4c4ed94e85b875c35a83bdfc3bcfbb29854d3f3487e63f82f1ccd9235264053e49e7fa461596cdab",
+          "sha256": "745a085f134989414fd86855103c24f191798c45311a430ded6733911abb6e32",
+          "sha1": "68b35b697d8c40675200ed4eaa332f0a3e4320ba",
+          "md5": "65b3d06b78e2358b7b3a1909f28251de"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c.jar",
+          "size": 157290,
+          "sha512": "e7f28f33d85fbd27f7edc83c6b435d1bb16b00260935354c4c4ed94e85b875c35a83bdfc3bcfbb29854d3f3487e63f82f1ccd9235264053e49e7fa461596cdab",
+          "sha256": "745a085f134989414fd86855103c24f191798c45311a430ded6733911abb6e32",
+          "sha1": "68b35b697d8c40675200ed4eaa332f0a3e4320ba",
+          "md5": "65b3d06b78e2358b7b3a1909f28251de"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-sql-plugin-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 28204,
+          "sha512": "8cc702c8388c35f64058d5c636984cacc33cb9d169c4f6e750a89d56359db321da6d0b1e9b72c845392ba710e3bcdf505c8ce24e47e0236af8311cb8de004d62",
+          "sha256": "e20b2d3234d1143f1b6d031e785fd9e2eaa5007608b233f796075ad535ef6fb1",
+          "sha1": "b58f087697a1dc8abc25138a6fd49d165f41e6a0",
+          "md5": "d9bb8ccf4e687cf3e4ac0f2b45caf533"
+        }
+      ]
+    }
+  ]
+}

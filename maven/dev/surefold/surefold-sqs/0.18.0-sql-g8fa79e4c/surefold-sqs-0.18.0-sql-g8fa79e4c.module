@@ -1,0 +1,165 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-sqs",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "sqs",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sqs-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sqs-0.18.0-sql-g8fa79e4c.jar",
+          "size": 54030,
+          "sha512": "8ceba2916a9b8e8ee9dfd27a5953f8b66d3ff8b3872e4dfaf2cb5b2629febae7c4083a5bb919a2b8f74fd48a813d1477edbf3bbade189c126ac786866a378314",
+          "sha256": "ce88acd064170ab34b0fe41b2fcb18da8cdcb439c195369680dfdd24e57e4381",
+          "sha1": "1713b248d4ef12c8c658b32376b0f245e5556e24",
+          "md5": "3d1bd3cfd91d47f48bebb32436ce4056"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "software.amazon.awssdk",
+          "module": "url-connection-client",
+          "version": {
+            "requires": "2.55.6"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "sqs",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sqs-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sqs-0.18.0-sql-g8fa79e4c.jar",
+          "size": 54030,
+          "sha512": "8ceba2916a9b8e8ee9dfd27a5953f8b66d3ff8b3872e4dfaf2cb5b2629febae7c4083a5bb919a2b8f74fd48a813d1477edbf3bbade189c126ac786866a378314",
+          "sha256": "ce88acd064170ab34b0fe41b2fcb18da8cdcb439c195369680dfdd24e57e4381",
+          "sha1": "1713b248d4ef12c8c658b32376b0f245e5556e24",
+          "md5": "3d1bd3cfd91d47f48bebb32436ce4056"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-sqs-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-sqs-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 10200,
+          "sha512": "83db406d13c095f0471afd571397b3ffdf8406810839f0590eb28cfa714ef514478d932f9fcd2fb54b693b098089d678b55b67cb1f7a1f6a93eebe30be99734e",
+          "sha256": "8d24406791fccac32efc95cc94a397f43fb9f85c512db3e1e93bd105e1be36fe",
+          "sha1": "c4fb544cfc81a6941be1b5aa7d16f98207d37f2e",
+          "md5": "f55ce4df36b4b37b590ea3ac2d16a250"
+        }
+      ]
+    }
+  ]
+}

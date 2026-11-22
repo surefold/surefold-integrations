@@ -1,0 +1,137 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-sqs-test",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-sqs",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.junit.jupiter",
+          "module": "junit-jupiter-api",
+          "version": {
+            "requires": "6.1.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sqs-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sqs-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 10157,
+          "sha512": "6fd42cc93d05596688a12b5a03528cfd5cc5e7ff97acd8dff352e5836b18a405838a4cb251223f58fb7ce1ae64f6467fd59cd83595de38830a224b6e02187290",
+          "sha256": "dcf4bf04df74c5f3ee2c19b9e7331aef7229afea0b3860d4f42f3599d0d80e17",
+          "sha1": "431bdc3483d4450cef4f7f1d3393986d39420563",
+          "md5": "b99e74d5863d920d120439510aaf3529"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.elasticmq",
+          "module": "elasticmq-rest-sqs_2.13",
+          "version": {
+            "requires": "1.7.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-sqs",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.junit.jupiter",
+          "module": "junit-jupiter-api",
+          "version": {
+            "requires": "6.1.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-sqs-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-sqs-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 10157,
+          "sha512": "6fd42cc93d05596688a12b5a03528cfd5cc5e7ff97acd8dff352e5836b18a405838a4cb251223f58fb7ce1ae64f6467fd59cd83595de38830a224b6e02187290",
+          "sha256": "dcf4bf04df74c5f3ee2c19b9e7331aef7229afea0b3860d4f42f3599d0d80e17",
+          "sha1": "431bdc3483d4450cef4f7f1d3393986d39420563",
+          "md5": "b99e74d5863d920d120439510aaf3529"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-sqs-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-sqs-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 2627,
+          "sha512": "67204f5edbbe101d4a23ac4ce5726a1f2604d5d957f0a2568f733bb7e06c8e8ca636e32e990922521cb62afd3fe0a05802a29ea3823eb3679d12493f24c79b04",
+          "sha256": "d6b88e14b52e0468ac97ac948941636fd58c1889edff401601fe7aadb135516d",
+          "sha1": "3b286d26bdd9bfc080dfadb90283c026f6c3905d",
+          "md5": "ebff7cf3700e652e0028045566852fbf"
+        }
+      ]
+    }
+  ]
+}

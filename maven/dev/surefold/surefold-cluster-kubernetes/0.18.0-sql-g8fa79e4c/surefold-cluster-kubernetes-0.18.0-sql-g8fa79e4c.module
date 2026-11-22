@@ -1,0 +1,150 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-cluster-kubernetes",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.fabric8",
+          "module": "kubernetes-client-api",
+          "version": {
+            "requires": "7.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c.jar",
+          "size": 13133,
+          "sha512": "259d023bcb5b341b29488ccad2abc1bd6c22b353869b648538273a66122bf6d6f7e05f6778379d6a3e2a9b8a7079fcf3fb080abbeb9f3171a4c48a4a4ea584e0",
+          "sha256": "056ad3fae2cbde3b8c2df365b426b8390064deb946a2cb94c663a847273a5fd7",
+          "sha1": "5079ee7b3856e34843c78eb401f2f3fdb6e4942a",
+          "md5": "a9977e71262b077b58a797f6857c2e1d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.fabric8",
+          "module": "kubernetes-client-api",
+          "version": {
+            "requires": "7.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "io.fabric8",
+          "module": "kubernetes-client",
+          "version": {
+            "requires": "7.9.0"
+          },
+          "excludes": [
+            {
+              "group": "io.fabric8",
+              "module": "kubernetes-httpclient-vertx"
+            }
+          ]
+        },
+        {
+          "group": "io.fabric8",
+          "module": "kubernetes-httpclient-jdk",
+          "version": {
+            "requires": "7.9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c.jar",
+          "size": 13133,
+          "sha512": "259d023bcb5b341b29488ccad2abc1bd6c22b353869b648538273a66122bf6d6f7e05f6778379d6a3e2a9b8a7079fcf3fb080abbeb9f3171a4c48a4a4ea584e0",
+          "sha256": "056ad3fae2cbde3b8c2df365b426b8390064deb946a2cb94c663a847273a5fd7",
+          "sha1": "5079ee7b3856e34843c78eb401f2f3fdb6e4942a",
+          "md5": "a9977e71262b077b58a797f6857c2e1d"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-cluster-kubernetes-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 3352,
+          "sha512": "8833f2cfa19705552b2d66fb6e1cdbb3e711e90b8fe32bc9149a7e1e7b2861a39e3f858107632e000cb60898b9d0d6ac281f3c925ef245599f10be319150c1e3",
+          "sha256": "e8194686bcef6f4085dc112fac89d4d2919f063a6830bbfbe43d6daddeb8e52b",
+          "sha1": "fa12729ced8337e481bf9013cc4bb1ee92d0cd6d",
+          "md5": "a6e57fc9403e932fe37309c5fa32756d"
+        }
+      ]
+    }
+  ]
+}

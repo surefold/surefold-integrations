@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-app-cluster",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-actor",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-typesafe",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-cluster-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-cluster-0.18.0-sql-g8fa79e4c.jar",
+          "size": 21298,
+          "sha512": "c801a57a9dab2782ccab23f1a5a5684a2599eaa723472ab842ee1878f38cb197d8356d78ddf0690042ecfa3546bf96383cd8b2a3741ec8b7351b4cae03041711",
+          "sha256": "1039a7d05707c74eac5683f603e4cd3789358a2fdc51ab61ada8a1c9368f9404",
+          "sha1": "07205437a5d25f4a625f0b925576ea0ca64617a7",
+          "md5": "c03e854859e3d66fcf39c7d03a6587bf"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-actor",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-typesafe",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-cluster-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-cluster-0.18.0-sql-g8fa79e4c.jar",
+          "size": 21298,
+          "sha512": "c801a57a9dab2782ccab23f1a5a5684a2599eaa723472ab842ee1878f38cb197d8356d78ddf0690042ecfa3546bf96383cd8b2a3741ec8b7351b4cae03041711",
+          "sha256": "1039a7d05707c74eac5683f603e4cd3789358a2fdc51ab61ada8a1c9368f9404",
+          "sha1": "07205437a5d25f4a625f0b925576ea0ca64617a7",
+          "md5": "c03e854859e3d66fcf39c7d03a6587bf"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-app-cluster-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-app-cluster-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 3306,
+          "sha512": "4e407e14913c631d8f14d89ce01d225f88e76fff4476cf069c0705011b047d9c64b8b1b701f4ec64311ccc8a6b80da084ea4bc07e7b2f5ec694a5b42a4e88b64",
+          "sha256": "3d7cf73bdd5be407ba5be4b5399b7c7a31c120bb3bfaf3acceb8d2d2b93b9030",
+          "sha1": "e7c4d60bbcb91ba58c862e735c1f9c70ad81cab0",
+          "md5": "75606c32c9a34bebc61f2c95b6817fd8"
+        }
+      ]
+    }
+  ]
+}

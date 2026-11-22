@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-micrometer",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.micrometer",
+          "module": "micrometer-core",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-micrometer-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-micrometer-0.18.0-sql-g8fa79e4c.jar",
+          "size": 7184,
+          "sha512": "2e0e052f5020750bb9298b3bfd46de12adede7e0cab75d4daea5330a626206d7630e0da731766b37cca379cea47664d704a53a2a31ea4d55cd73740eeeb4f5db",
+          "sha256": "999b7901b139f93c46b4fe79560ef6119b8d7c2e2661118b46170d0dae53ff5f",
+          "sha1": "a3aa2b4e60449f5a3c117990fea8d535df9cdc27",
+          "md5": "d4e22c26c1978912040eae8da4a1f242"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.micrometer",
+          "module": "micrometer-core",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-micrometer-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-micrometer-0.18.0-sql-g8fa79e4c.jar",
+          "size": 7184,
+          "sha512": "2e0e052f5020750bb9298b3bfd46de12adede7e0cab75d4daea5330a626206d7630e0da731766b37cca379cea47664d704a53a2a31ea4d55cd73740eeeb4f5db",
+          "sha256": "999b7901b139f93c46b4fe79560ef6119b8d7c2e2661118b46170d0dae53ff5f",
+          "sha1": "a3aa2b4e60449f5a3c117990fea8d535df9cdc27",
+          "md5": "d4e22c26c1978912040eae8da4a1f242"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-micrometer-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-micrometer-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 2406,
+          "sha512": "b5518bcf5da4b67e8da3398f6f320e59c0a516709d7dc54bd6053720ff71dd432c90a844059f13042e54d4b221f84636e5a444333657f96f6cc0eb0d21df39a9",
+          "sha256": "b217014828530ca5c099e03065659d843226462e3a05cd4e921be65433acaa7a",
+          "sha1": "6fd35a91bfba7b48aeb7009d1c3e3aa3ea7a48be",
+          "md5": "f4af1223093ae4abfc7e92ce9b54ebc3"
+        }
+      ]
+    }
+  ]
+}

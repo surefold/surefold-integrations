@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-openfeature",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.openfeature",
+          "module": "sdk",
+          "version": {
+            "requires": "1.23.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-openfeature-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-openfeature-0.18.0-sql-g8fa79e4c.jar",
+          "size": 26717,
+          "sha512": "bc7838779c69cc8b8a1327ec1b5348f55090df3fd871cae1806107f532392d864bda6441db90ad6d97be1e697c5debb9046ef02a6343cef5bd4aab0a19fa983c",
+          "sha256": "a9b465ad01e77f336675be5a4f9b4a43ac0d51c8fd13810ff796f684e1e68614",
+          "sha1": "9799f443fff04514e067576434988298ca724dec",
+          "md5": "0abed2fc8b1758ae2908ec46c88054e8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.openfeature",
+          "module": "sdk",
+          "version": {
+            "requires": "1.23.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-openfeature-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-openfeature-0.18.0-sql-g8fa79e4c.jar",
+          "size": 26717,
+          "sha512": "bc7838779c69cc8b8a1327ec1b5348f55090df3fd871cae1806107f532392d864bda6441db90ad6d97be1e697c5debb9046ef02a6343cef5bd4aab0a19fa983c",
+          "sha256": "a9b465ad01e77f336675be5a4f9b4a43ac0d51c8fd13810ff796f684e1e68614",
+          "sha1": "9799f443fff04514e067576434988298ca724dec",
+          "md5": "0abed2fc8b1758ae2908ec46c88054e8"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-openfeature-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-openfeature-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 6521,
+          "sha512": "fb04e17c46988669d250228ea0874638928cd2e688887300fd70969e2ff6782f7fcbb405fe74bcf2e7ecb26d0cb2220658f643bed0dc886b91d082cb91a46e9c",
+          "sha256": "9de03cbce73eac85cc512e796653a10c8b007be9302e5853a46a990938baade1",
+          "sha1": "738c29a3ee75285c67ca35e9f59d10278d3aa97c",
+          "md5": "19ffa0ab6e79073bbdcd2f111a8323a1"
+        }
+      ]
+    }
+  ]
+}

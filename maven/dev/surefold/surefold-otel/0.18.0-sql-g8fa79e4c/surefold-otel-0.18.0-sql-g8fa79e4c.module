@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-otel",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.opentelemetry",
+          "module": "opentelemetry-api",
+          "version": {
+            "requires": "1.67.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-otel-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-otel-0.18.0-sql-g8fa79e4c.jar",
+          "size": 13639,
+          "sha512": "a47efc0664d5f33321d091f9fa1664e5d569687d3683b59dee8889035bb088b3c10ce2362f632660560c3a22aa0dd83e70a67be1c00abbe05f7b4ea70d28f004",
+          "sha256": "2135e5c620c44adb05a9c6cd6bd8169ac4c8caacda2f32fc2af3d4cd6327bae1",
+          "sha1": "c5e627bbe771ecad5f1c42a8c3d8ed7d8d5bc2cb",
+          "md5": "348dac227901a4685417539040b76684"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.opentelemetry",
+          "module": "opentelemetry-api",
+          "version": {
+            "requires": "1.67.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-otel-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-otel-0.18.0-sql-g8fa79e4c.jar",
+          "size": 13639,
+          "sha512": "a47efc0664d5f33321d091f9fa1664e5d569687d3683b59dee8889035bb088b3c10ce2362f632660560c3a22aa0dd83e70a67be1c00abbe05f7b4ea70d28f004",
+          "sha256": "2135e5c620c44adb05a9c6cd6bd8169ac4c8caacda2f32fc2af3d4cd6327bae1",
+          "sha1": "c5e627bbe771ecad5f1c42a8c3d8ed7d8d5bc2cb",
+          "md5": "348dac227901a4685417539040b76684"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-otel-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-otel-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 4342,
+          "sha512": "0f8d309e439da839a4c328e379a5e8c30c1513dd7f63ed45d60f9ef4d258a249642b15206a0fe79fb48e061c8e9105b8f3a8ae15cb4782dc0adde4861cecf91f",
+          "sha256": "daf634b098c3c2efef223fe436cbe721f53b88b071dd152c2e26fb5ab2e4319f",
+          "sha1": "08c23ae640170caa5aea0073c79e936ae3824e14",
+          "md5": "4f2732cd8606c09f82f19ba0f540cc79"
+        }
+      ]
+    }
+  ]
+}

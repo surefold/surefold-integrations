@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-kafka",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.apache.kafka",
+          "module": "kafka-clients",
+          "version": {
+            "requires": "4.3.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-0.18.0-sql-g8fa79e4c.jar",
+          "size": 170077,
+          "sha512": "4bc3c669ecc0c3bb91e74d19c569191c9d7a8229bb0c8949bbb00976bc8bc680cb0401994a48b048efaba29aec4f64093ecfb45100e03c52e39071fda113b9b3",
+          "sha256": "c2961917db74f1c07ce4a91dead460346a42f69c9a2547fbffaff3f665b9678f",
+          "sha1": "b37f6e0d2de8a82328689fbe81fb4c293417fde2",
+          "md5": "347d74bd90ea5cccd702eb6fdb7d0e7e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.apache.kafka",
+          "module": "kafka-clients",
+          "version": {
+            "requires": "4.3.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-0.18.0-sql-g8fa79e4c.jar",
+          "size": 170077,
+          "sha512": "4bc3c669ecc0c3bb91e74d19c569191c9d7a8229bb0c8949bbb00976bc8bc680cb0401994a48b048efaba29aec4f64093ecfb45100e03c52e39071fda113b9b3",
+          "sha256": "c2961917db74f1c07ce4a91dead460346a42f69c9a2547fbffaff3f665b9678f",
+          "sha1": "b37f6e0d2de8a82328689fbe81fb4c293417fde2",
+          "md5": "347d74bd90ea5cccd702eb6fdb7d0e7e"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-kafka-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-kafka-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 35667,
+          "sha512": "325e0f1602f6870824d50aa8f2d012f1aa05595b409f5f9d905e2e75e4322cf8eda85c9c306b37f44c378e6e396a19cb990306d77e211567c412506d4ece7e66",
+          "sha256": "7bebbf9ceb803c50a980eb35283ccaa9fb297798ce5e92263b9836bff487c57d",
+          "sha1": "59fbc6e687a5c58b8676ef041aabf114e1851b12",
+          "md5": "21c73810c67a4b1688d311c7b7f88a5f"
+        }
+      ]
+    }
+  ]
+}

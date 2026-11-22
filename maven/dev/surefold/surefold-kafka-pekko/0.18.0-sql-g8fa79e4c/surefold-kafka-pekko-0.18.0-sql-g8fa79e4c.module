@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-kafka-pekko",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-kafka",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-connectors-kafka_2.13",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 8508,
+          "sha512": "f60e06f834adaaf04b55e4c5f945b5b3ce28912209f8d56e00cec0bfbe381b080ae70765d7d66507fefafcec9e71bc2599132f107a0f09c1171f407340a6edca",
+          "sha256": "a5de7acb9f2f052f4547068c6e73cc4044a4368a600ee40c27eb6033fdcdd0ad",
+          "sha1": "37734153ca384c5487630faebba5d0fb373621c8",
+          "md5": "6b17795d331c617a8a768701c54a3eee"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-kafka",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-stream-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.apache.pekko",
+          "module": "pekko-connectors-kafka_2.13",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 8508,
+          "sha512": "f60e06f834adaaf04b55e4c5f945b5b3ce28912209f8d56e00cec0bfbe381b080ae70765d7d66507fefafcec9e71bc2599132f107a0f09c1171f407340a6edca",
+          "sha256": "a5de7acb9f2f052f4547068c6e73cc4044a4368a600ee40c27eb6033fdcdd0ad",
+          "sha1": "37734153ca384c5487630faebba5d0fb373621c8",
+          "md5": "6b17795d331c617a8a768701c54a3eee"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-kafka-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 2584,
+          "sha512": "d38ebb2b60e9dd67972d1d7223af6c3f354f8233cd018216cd0ef2e09de4e978b961ad55a60e2a0478d0560479bfb408647f56acd1676919b7b83d3613387f99",
+          "sha256": "63cea01b20ed1041b75ac80721961287bad02aab2f4911ec7ab1f4d534634ba5",
+          "sha1": "56afc315857cac828b75fed4d3f9a4d4fd8fc4e5",
+          "md5": "519501a23d00d9cce8caa917171ec5b1"
+        }
+      ]
+    }
+  ]
+}

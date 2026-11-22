@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-app-liquibase",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.liquibase",
+          "module": "liquibase-core",
+          "version": {
+            "requires": "4.32.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c.jar",
+          "size": 9970,
+          "sha512": "25904a554f3e3247921b9a373acb2749106c7f01efd6b6787fa7124c68733e8f65c81010e47ce8b5bcc32f008dd8ff5c95749d8674dd4e9835f62dcc60db703d",
+          "sha256": "650d3b7655a35d19d576603c8d24c52355c38dd96712d8dcd5d86acd272259b5",
+          "sha1": "da00922f64c5385d8a8a14b091b08619e239df52",
+          "md5": "e03f9c60f400a8faa0b793e8d941d6e1"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.liquibase",
+          "module": "liquibase-core",
+          "version": {
+            "requires": "4.32.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c.jar",
+          "size": 9970,
+          "sha512": "25904a554f3e3247921b9a373acb2749106c7f01efd6b6787fa7124c68733e8f65c81010e47ce8b5bcc32f008dd8ff5c95749d8674dd4e9835f62dcc60db703d",
+          "sha256": "650d3b7655a35d19d576603c8d24c52355c38dd96712d8dcd5d86acd272259b5",
+          "sha1": "da00922f64c5385d8a8a14b091b08619e239df52",
+          "md5": "e03f9c60f400a8faa0b793e8d941d6e1"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-app-liquibase-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 1957,
+          "sha512": "07840e9b08a104cb9c497eae18825485a734265b421fb4d75a1a0d1bd56ba60d8977c49ced1640c463a08a4fe7dfb677a3eb61e53709279b8ff18098e5b9bb39",
+          "sha256": "633986af543bb374a50f1637d3ae27f9a94f23559a6f7ba4c597915f20af2c05",
+          "sha1": "58a027386f1f76e8fe68cf392cd73621853e28b8",
+          "md5": "cd4d5535b4751261638c4761407260d5"
+        }
+      ]
+    }
+  ]
+}

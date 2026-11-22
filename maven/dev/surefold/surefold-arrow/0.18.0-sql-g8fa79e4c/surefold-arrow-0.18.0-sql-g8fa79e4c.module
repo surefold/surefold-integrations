@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-arrow",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.arrow-kt",
+          "module": "arrow-core",
+          "version": {
+            "requires": "2.1.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-arrow-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-arrow-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4071,
+          "sha512": "84ea79d5908c4995ce481903d81dbdf69799d676b987af4ea363e868901d4bbe39f9333c3a6b0d4004092168b384cb7d130e5ffc7bc631393e7e4032661c5048",
+          "sha256": "51aea49280ef7b51945ff8c34b4818e324a41e20ba41e4723ecfd5dfa07f31c6",
+          "sha1": "4e784abb00144a1525acab34c25235ef0a3751cd",
+          "md5": "0688141460a4c05a29659dcfd2222ac0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "io.arrow-kt",
+          "module": "arrow-core",
+          "version": {
+            "requires": "2.1.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-arrow-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-arrow-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4071,
+          "sha512": "84ea79d5908c4995ce481903d81dbdf69799d676b987af4ea363e868901d4bbe39f9333c3a6b0d4004092168b384cb7d130e5ffc7bc631393e7e4032661c5048",
+          "sha256": "51aea49280ef7b51945ff8c34b4818e324a41e20ba41e4723ecfd5dfa07f31c6",
+          "sha1": "4e784abb00144a1525acab34c25235ef0a3751cd",
+          "md5": "0688141460a4c05a29659dcfd2222ac0"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-arrow-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-arrow-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 1139,
+          "sha512": "e1a7ed355efb2587ed779c04db1efc4f9300b51e1aad6bfb930529178bbe17d73217224eccba74b7124421359ff15c37873847f7eaf6fe8491b8e3dd642314c9",
+          "sha256": "8fd1aa20e288a26f5779923f6eb2b04bf2b08dfe3e3c4f573f1e0478c20f896f",
+          "sha1": "29eed0dc8b049cc575b678d8b65612e230799130",
+          "md5": "91680da0929b9a7746bd3e003164db64"
+        }
+      ]
+    }
+  ]
+}

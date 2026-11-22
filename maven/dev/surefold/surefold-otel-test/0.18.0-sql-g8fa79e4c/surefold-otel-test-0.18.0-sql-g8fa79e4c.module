@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-otel-test",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-otel",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "io.opentelemetry",
+          "module": "opentelemetry-sdk",
+          "version": {
+            "requires": "1.67.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-otel-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-otel-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4370,
+          "sha512": "29214e27daad6059ad17e7b2bfdcab01d539da0a3ab0fcb1700b144054df5c5ca660d34a8075f35508dde62f09174e36bbd48599adf09711944b67af345813af",
+          "sha256": "00c88c83d11f5616939e70f2c656e17714de05338ec10406fa3e80e6ae5bc8dd",
+          "sha1": "b9412160a01c08a4508ca53fa42fdeeda4e60bb4",
+          "md5": "90cd9435bd6060aa05491b79d8e51187"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-otel",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "io.opentelemetry",
+          "module": "opentelemetry-sdk",
+          "version": {
+            "requires": "1.67.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-otel-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-otel-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4370,
+          "sha512": "29214e27daad6059ad17e7b2bfdcab01d539da0a3ab0fcb1700b144054df5c5ca660d34a8075f35508dde62f09174e36bbd48599adf09711944b67af345813af",
+          "sha256": "00c88c83d11f5616939e70f2c656e17714de05338ec10406fa3e80e6ae5bc8dd",
+          "sha1": "b9412160a01c08a4508ca53fa42fdeeda4e60bb4",
+          "md5": "90cd9435bd6060aa05491b79d8e51187"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-otel-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-otel-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 1369,
+          "sha512": "855de25dfb73d6eb70aabf31fbaa9044b5b225b1f0ce0601cb97a5d738d19dea12269aa9899f7cbe9141cdb061fbf1cc79e8e92bc42d4a1d8719f88b18222261",
+          "sha256": "6d69c3cb145ba1f438cfa6fcddd48bde99b53c2aa580feb774314abb16b8a2aa",
+          "sha1": "c493341087c73907a64d0bd0267eb79c5dc61dfb",
+          "md5": "151579aec3088b49138cdaa7563b342e"
+        }
+      ]
+    }
+  ]
+}

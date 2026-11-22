@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-app-pekko",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-actor-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 12184,
+          "sha512": "41deb5b5c67b13cc43c89d8dd8e2e1bdd8d3656dd681d5af0b0897e4313e6973a8fbf15bcaaa67582e6113bc30eb887c858716901807ab1a64031216d7db03c0",
+          "sha256": "c6fce4991142a9f8f4d9bcb7f00af7fec8c56dc2c59ecc126fe272b589ff7497",
+          "sha1": "ad6db0ef7177b4d9195250485b763842d7705c97",
+          "md5": "17b9e78068cf6585d82b244d723f475f"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-actor-pekko",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-pekko-0.18.0-sql-g8fa79e4c.jar",
+          "size": 12184,
+          "sha512": "41deb5b5c67b13cc43c89d8dd8e2e1bdd8d3656dd681d5af0b0897e4313e6973a8fbf15bcaaa67582e6113bc30eb887c858716901807ab1a64031216d7db03c0",
+          "sha256": "c6fce4991142a9f8f4d9bcb7f00af7fec8c56dc2c59ecc126fe272b589ff7497",
+          "sha1": "ad6db0ef7177b4d9195250485b763842d7705c97",
+          "md5": "17b9e78068cf6585d82b244d723f475f"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-app-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-app-pekko-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 1494,
+          "sha512": "e5b4b0555e386b2804b2040e96003ef4a1d7ee9588782556cb149c439042d9937af37b8c72f0eebd5786d5ab567373c4030588785ce4d57c714d2c79078bcc3a",
+          "sha256": "8aac57ad88f331f202fc1a0398b12859e0c5a70002c6906646ee0e7c7caf44c5",
+          "sha1": "6ad4b5124e2e7038ab5d2dab118bc8d651a8f8ee",
+          "md5": "a1ed295369d0dd9d1d19689248c043b5"
+        }
+      ]
+    }
+  ]
+}

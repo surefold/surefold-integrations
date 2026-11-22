@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-kafka-test",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-kafka",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "io.github.embeddedkafka",
+          "module": "embedded-kafka_2.13",
+          "version": {
+            "requires": "4.3.1"
+          }
+        },
+        {
+          "group": "org.junit.jupiter",
+          "module": "junit-jupiter-api",
+          "version": {
+            "requires": "6.1.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 24158,
+          "sha512": "90559412527fa03989cab4dea418ddd1467f534ca2df6dc332120aaae0fc6de7e6b48a2ecab328f5af91a370f7a6d635bb5f8357917445f329d60bb5ed08546b",
+          "sha256": "68876c3ee44b5139db3e491b1a2a69aaf3b31ecc8ab236a003a3c9edbb18f572",
+          "sha1": "c9902c99dda8c2249b9e4f798298bd12169397e4",
+          "md5": "d404206fe98b55ae583a5ec722323336"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-kafka",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "io.github.embeddedkafka",
+          "module": "embedded-kafka_2.13",
+          "version": {
+            "requires": "4.3.1"
+          }
+        },
+        {
+          "group": "org.junit.jupiter",
+          "module": "junit-jupiter-api",
+          "version": {
+            "requires": "6.1.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-kafka-test-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-kafka-test-0.18.0-sql-g8fa79e4c.jar",
+          "size": 24158,
+          "sha512": "90559412527fa03989cab4dea418ddd1467f534ca2df6dc332120aaae0fc6de7e6b48a2ecab328f5af91a370f7a6d635bb5f8357917445f329d60bb5ed08546b",
+          "sha256": "68876c3ee44b5139db3e491b1a2a69aaf3b31ecc8ab236a003a3c9edbb18f572",
+          "sha1": "c9902c99dda8c2249b9e4f798298bd12169397e4",
+          "md5": "d404206fe98b55ae583a5ec722323336"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-kafka-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-kafka-test-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 6777,
+          "sha512": "cd2b03e6acd70dfe328f8ba01fa30c96abbcbc5e7313afc6222e36ca1821b32877bf7415af90e9f874e7fe0369290cd0e3bab9ffbfc8a3fb54fc7dedb41e1c57",
+          "sha256": "d232dd94920c761da6b3a1550ea378a52c59aa1ec4234a8bbaae96d99f315fed",
+          "sha1": "64c45488714a66a969f7367c50f8d3b338bae907",
+          "md5": "043160dfda3077a68920c36fb6a2624c"
+        }
+      ]
+    }
+  ]
+}

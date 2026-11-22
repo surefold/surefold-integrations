@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-app-typesafe",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "com.typesafe",
+          "module": "config",
+          "version": {
+            "requires": "1.4.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c.jar",
+          "size": 61431,
+          "sha512": "673a76d0385e9ad473b32442a9a057f9f05d128b04240eeb80a9c2f1d3c044f213b8b70319c007095ca5d8b83da88a50425cb3aa08700b999b30ad1a5a2a7be2",
+          "sha256": "b78ba28316c6b1cce4222f38ae774aa59fcf7aafa98e7f97dc451b6286af67fe",
+          "sha1": "c07c00c36bc1ad30bfccd115d29027147c1733c6",
+          "md5": "313c3e964bc238c680bcde696e2d404a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "com.typesafe",
+          "module": "config",
+          "version": {
+            "requires": "1.4.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c.jar",
+          "size": 61431,
+          "sha512": "673a76d0385e9ad473b32442a9a057f9f05d128b04240eeb80a9c2f1d3c044f213b8b70319c007095ca5d8b83da88a50425cb3aa08700b999b30ad1a5a2a7be2",
+          "sha256": "b78ba28316c6b1cce4222f38ae774aa59fcf7aafa98e7f97dc451b6286af67fe",
+          "sha1": "c07c00c36bc1ad30bfccd115d29027147c1733c6",
+          "md5": "313c3e964bc238c680bcde696e2d404a"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-app-typesafe-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 12105,
+          "sha512": "ece91629a708b0a82b4741938a8378ccd1c2ab3d0cb493a5cb6cf36553e39eb14bbeeb9059fdb0a98a1092be890bb4e14b971a55233ac76b193832c57a540f6d",
+          "sha256": "feb2884664899c288cb2a25f98cc57f083ae1e02e7773c914a77a57da2d0df28",
+          "sha1": "ef6806e0567f78670fd91617000d502773c4f328",
+          "md5": "dc46241b7cbd13754f729ec077a83adc"
+        }
+      ]
+    }
+  ]
+}

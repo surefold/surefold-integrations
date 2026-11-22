@@ -1,0 +1,249 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-cluster-aws",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "servicediscovery",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "ecs",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "dynamodb",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c.jar",
+          "size": 19123,
+          "sha512": "a216860960884c2c7949976b95ccd1989cc63fdbc39c4b7c4a86442a1cfd67e928539c024b5b7b01472131e56e30d6084a795cb76bec0decfd88ef5c751e75da",
+          "sha256": "248758a649c97e4d22ce57ad63559ee84d31bbe9acd231c9527c05740490660d",
+          "sha1": "cff7f3e94e9c8141624415f01975d4b08525f4d2",
+          "md5": "d2b7ee41ad6fa25db0fd1759e7b70998"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-cluster",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "servicediscovery",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "ecs",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "dynamodb",
+          "version": {
+            "requires": "2.55.6"
+          },
+          "excludes": [
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "netty-nio-client"
+            },
+            {
+              "group": "software.amazon.awssdk",
+              "module": "apache5-client"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        },
+        {
+          "group": "software.amazon.awssdk",
+          "module": "url-connection-client",
+          "version": {
+            "requires": "2.55.6"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c.jar",
+          "size": 19123,
+          "sha512": "a216860960884c2c7949976b95ccd1989cc63fdbc39c4b7c4a86442a1cfd67e928539c024b5b7b01472131e56e30d6084a795cb76bec0decfd88ef5c751e75da",
+          "sha256": "248758a649c97e4d22ce57ad63559ee84d31bbe9acd231c9527c05740490660d",
+          "sha1": "cff7f3e94e9c8141624415f01975d4b08525f4d2",
+          "md5": "d2b7ee41ad6fa25db0fd1759e7b70998"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-cluster-aws-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 3587,
+          "sha512": "29cdf50edbd380a362330842afdce71368f91cf2685aadf9367cc71f77b112d75b6abc9622978ab3d7d4421bdf85993fe6b74e74eab7940ad84c24d1df9bcb0a",
+          "sha256": "42b251293e1327213efdfe03e66d905f606601aaef8fc1a42c96846795d6f87b",
+          "sha1": "dc91ec3588e01de0f4da3d5a7278a6d9ddf7b887",
+          "md5": "87551a27854c64c4b4f3ca09895fa32e"
+        }
+      ]
+    }
+  ]
+}

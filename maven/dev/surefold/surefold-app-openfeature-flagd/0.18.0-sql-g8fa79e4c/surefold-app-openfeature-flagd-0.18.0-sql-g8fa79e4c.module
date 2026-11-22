@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-app-openfeature-flagd",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-openfeature",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-typesafe",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.openfeature.contrib.providers",
+          "module": "flagd",
+          "version": {
+            "requires": "0.15.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c.jar",
+          "size": 12887,
+          "sha512": "93006c5501c5c954422c372c2430b5abb28ba279670ba2f568e1d513280c46aa95f3540e6da58567335784749ac37b3297fe82c620ff413d2ec69bbaa8a5105c",
+          "sha256": "b37edb0d970035b79dfd4fc6b43da81d3fadced869df29c4168d032bced6188f",
+          "sha1": "004884675756741efb40bf2c0adf1a23a1354d65",
+          "md5": "fc7b7a4d7af075347e6d08d526ac2711"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-openfeature",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.surefold",
+          "module": "surefold-app-typesafe",
+          "version": {
+            "requires": "0.18.0-sql-g8fa79e4c"
+          }
+        },
+        {
+          "group": "dev.openfeature.contrib.providers",
+          "module": "flagd",
+          "version": {
+            "requires": "0.15.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c.jar",
+          "size": 12887,
+          "sha512": "93006c5501c5c954422c372c2430b5abb28ba279670ba2f568e1d513280c46aa95f3540e6da58567335784749ac37b3297fe82c620ff413d2ec69bbaa8a5105c",
+          "sha256": "b37edb0d970035b79dfd4fc6b43da81d3fadced869df29c4168d032bced6188f",
+          "sha1": "004884675756741efb40bf2c0adf1a23a1354d65",
+          "md5": "fc7b7a4d7af075347e6d08d526ac2711"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-app-openfeature-flagd-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 2476,
+          "sha512": "6a2d9ba6c7af8d437423d9ae1094c6ef566ad802568846d0fbfa3b0f19abd510141188bdd414e076f956787b924a83d0070e33b8e29c1fe22d51b33846223974",
+          "sha256": "7c0d72da5cb442f25354a954ab112766c2e3828b31bec8542931c17cd4e0eda2",
+          "sha1": "ff4395964fd950eac2c449139be6b528f316c5be",
+          "md5": "d123baa636d76d6b4691f84ade793747"
+        }
+      ]
+    }
+  ]
+}

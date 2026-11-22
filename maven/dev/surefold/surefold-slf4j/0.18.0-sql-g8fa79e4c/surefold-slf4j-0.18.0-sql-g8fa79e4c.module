@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-slf4j",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.slf4j",
+          "module": "slf4j-api",
+          "version": {
+            "requires": "1.7.36"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-slf4j-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-slf4j-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4120,
+          "sha512": "d11b752e700fa41830f0958e03bf77602294eb10106ebf0524303efd74f77c7c741049dc1e07193cb32b20462c4735863e950c8bca00bd30f928c5c9c1e8d6c0",
+          "sha256": "3119f74e208e677d8cba6fede5164092c6ef6e30b5392971fa4a92a664c104b4",
+          "sha1": "2bb449a88df70b5a3cd1a97636564f8bfefa52dc",
+          "md5": "26eb1e013b79085cf148c8e596b7f6ae"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.slf4j",
+          "module": "slf4j-api",
+          "version": {
+            "requires": "1.7.36"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-slf4j-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-slf4j-0.18.0-sql-g8fa79e4c.jar",
+          "size": 4120,
+          "sha512": "d11b752e700fa41830f0958e03bf77602294eb10106ebf0524303efd74f77c7c741049dc1e07193cb32b20462c4735863e950c8bca00bd30f928c5c9c1e8d6c0",
+          "sha256": "3119f74e208e677d8cba6fede5164092c6ef6e30b5392971fa4a92a664c104b4",
+          "sha1": "2bb449a88df70b5a3cd1a97636564f8bfefa52dc",
+          "md5": "26eb1e013b79085cf148c8e596b7f6ae"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-slf4j-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-slf4j-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 1915,
+          "sha512": "90667e92722df6caa6da9285f2120346a6bc333b870ebcd55c529b4cfe317a36e6014be0877badf491f2d8f034f68e699ccf7d8bf5c850c6f5d7d29557025e5e",
+          "sha256": "fda4b547f66902e1ff9ab800706f49801c5dabc03eec69fd5d181ae6c280a349",
+          "sha1": "6786b03526a15ada37c98b80427f70edc57e5b4b",
+          "md5": "f31e37980e25ea53ca481508a2a3909f"
+        }
+      ]
+    }
+  ]
+}

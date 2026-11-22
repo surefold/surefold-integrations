@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.surefold",
+    "module": "surefold-actor-remote-kotlinx",
+    "version": "0.18.0-sql-g8fa79e4c",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.7.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-actor-remote",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-protobuf",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c.jar",
+          "size": 26479,
+          "sha512": "cd2c5856cb06f5d61506b6d9e7c32cd9d2ddcb6caccc9a97236f0c61a664112c26790ada30d7ea49dcff4ffdbdd90f3269f2c82fbae34288ac39aa471ed3060a",
+          "sha256": "5f4a8b33e73fb8593003ee6bed67c1a4bf07934a0b6ece0810e54b6bb3d87531",
+          "sha1": "6a0795543155ab8768d160d5b048776c47bf00b3",
+          "md5": "68ec6bda54c080d2613aa8ef97d84a0d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 25,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.surefold",
+          "module": "surefold-actor-remote",
+          "version": {
+            "requires": "0.18.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-protobuf",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c.jar",
+          "url": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c.jar",
+          "size": 26479,
+          "sha512": "cd2c5856cb06f5d61506b6d9e7c32cd9d2ddcb6caccc9a97236f0c61a664112c26790ada30d7ea49dcff4ffdbdd90f3269f2c82fbae34288ac39aa471ed3060a",
+          "sha256": "5f4a8b33e73fb8593003ee6bed67c1a4bf07934a0b6ece0810e54b6bb3d87531",
+          "sha1": "6a0795543155ab8768d160d5b048776c47bf00b3",
+          "md5": "68ec6bda54c080d2613aa8ef97d84a0d"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c-sources.jar",
+          "url": "surefold-actor-remote-kotlinx-0.18.0-sql-g8fa79e4c-sources.jar",
+          "size": 4211,
+          "sha512": "220a8071cc7983ab1b10a83cb1157b0abfcbb44fa9d58fd65a14a438c789284faa3e993ab449793edbea19593c1d60b92f7d84f14e7d401967044685cd37793b",
+          "sha256": "52e00f38eff37873221980311aa24cbce07b8b7352cedb73124d429756b7d34e",
+          "sha1": "b533665e3af8d8da6b3a2900fa8e367eb56b1807",
+          "md5": "82d6109b69d5bb93b97d6f88a981fbff"
+        }
+      ]
+    }
+  ]
+}
