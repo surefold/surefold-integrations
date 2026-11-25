@@ -5,6 +5,7 @@ package dev.surefold.sql.plugin
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
 import org.jetbrains.kotlin.config.CompilerConfiguration
+import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
@@ -43,6 +44,7 @@ import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.typeOrNull
 import org.jetbrains.kotlin.ir.types.withNullability
+import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.deepCopyWithoutPatchingParents
 import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.ir.util.hasTopLevelEqualFqName
@@ -52,6 +54,7 @@ import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.ir.util.propertyIfAccessor
 import org.jetbrains.kotlin.ir.visitors.IrTransformer
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import java.io.File
@@ -77,6 +80,10 @@ internal class SqlRewriter(
     private val dialect: PluginDialect = dialectOption?.let(::pluginDialect) ?: PluginDialect.Postgres
     private val moduleCase: ColumnCase = namesOption?.let(::columnCase) ?: ColumnCase.Snake
     private val objects = ArrayList<IrClass>()
+    private val output: File? = configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
+
+    /** Codec objects from earlier rounds, with their placeholder counts, which their class files do not carry. */
+    private val earlier = HashMap<IrClass, Int?>()
     private val batchElements = IdentityHashMap<IrCall, IrType>()
     private val counts = HashMap<IrSymbol, Int>()
     private val anonymous = HashMap<IrSymbol, String>()
@@ -95,6 +102,7 @@ internal class SqlRewriter(
             report(null, module, "tenantColumn and tenantPredicate are set together or not at all")
         }
         module.files.forEach { file -> collect(file) }
+        readIndex(module)
         module.accept(
             object : IrVisitorVoid() {
                 override fun visitCall(expression: IrCall) {
@@ -119,6 +127,31 @@ internal class SqlRewriter(
         }
         file.parentFile?.mkdirs()
         file.writeText(encodeCatalog(entries))
+    }
+
+    /** Kept unchanged after a failed round: the earlier index is still true of the classes on disk. */
+    fun writeIndex() {
+        val file = output?.resolve(INDEX_PATH) ?: return
+        if (problems.isNotEmpty()) return
+        val compiled = objects.filter(::isCodec).mapNotNull { obj ->
+            obj.classId?.let { IndexedCodec(it.asString(), placeholderCount(obj)) }
+        }
+        val kept = earlier.mapNotNull { (obj, count) -> obj.classId?.let { IndexedCodec(it.asString(), count) } }
+        file.parentFile.mkdirs()
+        file.writeText(encodeIndex(compiled + kept))
+    }
+
+    private fun readIndex(module: IrModuleFragment) {
+        val file = output?.resolve(INDEX_PATH)?.takeIf { it.isFile } ?: return
+        val codecs = decodeIndex(file.readText())
+            ?: return report(null, module, "$file was written by another version of the plugin: run a clean build")
+        val compiling = objects.mapNotNullTo(HashSet()) { it.classId }
+        codecs.forEach { codec ->
+            val id = ClassId.fromString(codec.classId)
+            // An object in this round's files is read from its source. One whose file was deleted no longer resolves.
+            val obj = if (id in compiling) null else symbols.compiled(id)?.owner
+            if (obj != null && obj.kind == ClassKind.OBJECT) earlier[obj] = codec.placeholders
+        }
     }
 
     override fun visitFile(declaration: IrFile, data: Walk): IrFile =
@@ -487,7 +520,7 @@ internal class SqlRewriter(
     private fun codecFor(type: IrType): CodecResult {
         if (type.isNullable()) return nullablePlan(type)
         scalar(type)?.let { return it }
-        val custom = objects.filter { implements(it, type) }
+        val custom = (objects + earlier.keys).filter { implements(it, type) }
         val klass = type.classOrNull?.owner
         return when {
             custom.size > 1 -> CodecResult.Missing("ambiguous codec for ${typeName(type)}")
@@ -534,7 +567,7 @@ internal class SqlRewriter(
     )
 
     private fun customPlan(obj: IrClass, type: IrType): CodecResult {
-        val count = placeholderCount(obj)
+        val count = placeholderCount(obj) ?: earlier[obj]
             ?: return CodecResult.Missing("codec ${obj.name.asString()} has no constant placeholders")
         return CodecResult.Ready(CodecPlan(count, type) { emit -> emit.instance(obj) })
     }
@@ -894,6 +927,12 @@ private fun enumEntry(expr: IrExpression?, fqName: String): String? {
     val parent = node.symbol.owner.parent as? IrClass ?: return null
     if (parent.kotlinFqName.asString() != fqName) return null
     return node.symbol.owner.name.asString()
+}
+
+private fun isCodec(klass: IrClass, seen: Set<IrClass> = emptySet()): Boolean = klass.superTypes.any { type ->
+    val parent = type.classOrNull?.owner
+    type.classFqName?.asString() == "dev.surefold.sql.DbCodec" ||
+        (parent != null && parent !in seen && isCodec(parent, seen + klass))
 }
 
 private fun implements(obj: IrClass, target: IrType): Boolean =

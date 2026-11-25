@@ -69,6 +69,9 @@ internal class Symbols(private val context: IrPluginContext, private val files: 
         else -> null
     }
 
+    /** A class compiled in an earlier round, which only the class path still has. */
+    fun compiled(id: ClassId): IrClassSymbol? = files.firstOrNull()?.let { context.finderForSource(it).findClass(id) }
+
     private fun function(name: String, regular: Int): IrSimpleFunctionSymbol? =
         functions(CallableId(SQL, Name.identifier(name))).firstOrNull { symbol ->
             symbol.owner.parameters.count { it.kind == IrParameterKind.Regular } == regular
