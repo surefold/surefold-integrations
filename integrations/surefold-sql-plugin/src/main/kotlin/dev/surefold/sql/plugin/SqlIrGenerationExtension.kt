@@ -11,5 +11,6 @@ internal class SqlIrGenerationExtension(private val configuration: CompilerConfi
         rewriter.note(moduleFragment)
         moduleFragment.transform(rewriter, Walk(null, null, null))
         rewriter.writeCatalog()
+        rewriter.writeIndex()
     }
 }

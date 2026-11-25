@@ -210,6 +210,31 @@ object SqlPluginSuite : Suite() {
             loader.close()
         }
 
+        test("a codec compiled in an earlier round is found, until its class is deleted") {
+            val round = ok("codec-round-one", snippet(MONEY_CODEC))
+            val paid = ok("codec-round-two", snippet(PAY), output = round.classes)
+            mentions(paid, "sample/Questions.class", "MoneyCodec") shouldBe true
+            File(round.classes, "sample/MoneyCodec.class").delete() shouldBe true
+            refused("codec-round-three", snippet(PAY), "no codec for sample.Money", output = round.classes)
+        }
+
+        test("an index from another plugin version asks for a clean build") {
+            val round = ok("index-round-one", snippet(MONEY_CODEC))
+            File(round.classes, "META-INF/surefold/sql.index").writeText("v0\n")
+            refused("index-round-two", snippet(PAY), "run a clean build", output = round.classes)
+        }
+
+        test("a second codec for one type in a later round is ambiguous") {
+            val round = ok("ambiguous-round-one", snippet(MONEY_CODEC))
+            val second = MONEY_CODEC.substringAfter("class Money(val pence: Int)\n").replace("MoneyCodec", "OtherCodec")
+            refused(
+                "ambiguous-round-two",
+                snippet(MONEY_IMPORTS + second + "\n" + PAY),
+                "ambiguous codec for sample.Money",
+                output = round.classes,
+            )
+        }
+
         test("a hand-written codec is used, and two codecs for one type are ambiguous") {
             val paid = ok(
                 "custom-codec",
@@ -620,8 +645,9 @@ internal fun ok(
     names: String? = null,
     dialect: String? = null,
     tenant: List<String> = TENANT_OPTIONS,
+    output: File? = null,
 ): Compiled {
-    val compiled = compile(name, source, names, dialect, tenant)
+    val compiled = compile(name, source, names, dialect, tenant, output)
     if (compiled.code != ExitCode.OK) compiled.log shouldBe "compilation failed"
     return compiled
 }
@@ -633,8 +659,9 @@ internal fun refused(
     names: String? = null,
     dialect: String? = null,
     tenant: List<String> = TENANT_OPTIONS,
+    output: File? = null,
 ) {
-    val compiled = compile(name, source, names, dialect, tenant)
+    val compiled = compile(name, source, names, dialect, tenant, output)
     compiled.code shouldBe ExitCode.COMPILATION_ERROR
     if (!compiled.log.lowercase().contains(needle.lowercase())) compiled.log shouldBe needle
 }
@@ -643,6 +670,30 @@ private fun mentions(compiled: Compiled, classFile: String, symbol: String): Boo
     val bytes = File(compiled.classes, classFile).readBytes()
     return String(bytes, Charsets.ISO_8859_1).contains(symbol)
 }
+
+private const val MONEY_IMPORTS = """
+import dev.surefold.fail.Either
+import dev.surefold.fail.right
+import dev.surefold.sql.DbCodec
+import dev.surefold.sql.SqlFailure
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+"""
+
+private const val MONEY_CODEC = MONEY_IMPORTS + """
+class Money(val pence: Int)
+object MoneyCodec : DbCodec<Money> {
+    override val placeholders: Int = 1
+    override fun write(statement: PreparedStatement, index: Int, value: Money) = Unit
+    override fun read(row: ResultSet, index: Int): Either<SqlFailure, Money> = Money(1).right()
+}
+"""
+
+private val PAY = """
+object Questions {
+    fun pay(money: Money) = sql("insert into payments (pence) values (${'$'}money)")
+}
+"""
 
 internal fun snippet(body: String): String = """
     package sample
@@ -670,18 +721,21 @@ private fun compile(
     names: String? = null,
     dialect: String? = null,
     tenant: List<String> = TENANT_OPTIONS,
+    output: File? = null,
 ): Compiled {
     val root = File("build/snippets/$name")
     root.deleteRecursively()
     root.mkdirs()
     val file = File(root, "Source.kt")
     file.writeText(source)
-    val classes = File(root, "classes")
+    // An earlier round's output, compiled into again with its classes on the class path, as incremental compiles do.
+    val classes = output ?: File(root, "classes")
     classes.mkdirs()
     val catalog = File(root, "catalog.txt")
     val plugin = File("build/plugin-path.txt").readText().trim()
     val classpath = File("build/snippet-classpath.txt").readLines()
         .filter { it.isNotBlank() }
+        .plus(listOfNotNull(output?.absolutePath))
         .joinToString(File.pathSeparator)
     val captured = ByteArrayOutputStream()
     val namesArg = if (names == null) emptyList() else listOf("-P", "plugin:dev.surefold.sql:names=$names")
